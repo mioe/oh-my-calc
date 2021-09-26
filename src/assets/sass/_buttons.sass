@@ -1,3 +1,8 @@
 button,
 .button
   font-weight: inherit
+  @apply focus:outline-none
+
+button:not(.clear),
+.button:not(.clear)
+  @apply inline-flex min-w-[32px] min-h-[32px] p-[6px] justify-center items-center text-center rounded-[4px] bg-$secondary

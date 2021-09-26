@@ -1,5 +1,7 @@
 <template>
-  <div class="relative min-h-screen flex flex-col">
+  <div class="relative w-full max-w-[500px] min-h-screen mx-auto flex flex-col">
+    <AppHeader />
     <router-view />
+    <AppFooter />
   </div>
 </template>
