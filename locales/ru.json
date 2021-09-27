@@ -1,8 +1,4 @@
 {
   "hello": "Привет",
-  "settings": "Настройки",
-  "theme": "Тема",
-  "darkTheme": "Темная тема",
-  "lightTheme": "Светлая тема",
-  "language": "Язык"
+  "munchkinCalculatorOffline": "Манчкин калькулятор (офлайн)"
 }

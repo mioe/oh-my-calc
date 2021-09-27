@@ -1,9 +1,15 @@
 <script setup lang="ts">
-
+import { computed, ComputedRef } from 'vue'
+import { useWindowSize } from '@vueuse/core'
+const { width, height } = useWindowSize()
+const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.value)
 </script>
 
 <template>
-  <footer class="sticky bottom-0 left-0 z-2 w-full h-[48px] mt-auto px-[8px] space-x-[8px] flex items-center justify-between bg-$document">
+  <footer
+    v-if="!isPortrait"
+    class="sticky bottom-0 left-0 z-2 w-full h-[48px] mt-auto px-[16px] space-x-[8px] flex items-center justify-between bg-$document"
+  >
     <router-link
       :to="{name: 'Home'}"
       class="font-medium"

@@ -1,8 +1,4 @@
 {
   "hello": "Hello",
-  "settings": "Settings",
-  "theme": "Theme",
-  "darkTheme": "Dark theme",
-  "lightTheme": "Light theme",
-  "language": "Language"
+  "munchkinCalculatorOffline": "Munchkin Calculator (offline)"
 }

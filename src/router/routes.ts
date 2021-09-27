@@ -8,6 +8,11 @@ const routes = [
     component: Home,
   },
   {
+    path: '/munchkin-calculator-offline',
+    name: 'MunchkinCalculatorOffline',
+    component: () => import('@/views/MunchkinCalculatorOffline.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/Error404.vue'),
   },
