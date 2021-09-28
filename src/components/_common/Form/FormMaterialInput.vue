@@ -61,7 +61,7 @@ const onInput = (ev: any): void => { emit('update:modelValue', ev.target.value) 
       @input="onInput"
     >
     <span
-      class="absolute inline-block top-0 left-[10px] text-[16px] transform"
+      class="absolute inline-block top-0 left-[10px] text-[16px] transform text-$typography-secondary"
       :class="isFocus || valueIsNotEmpty
         ? 'translate-y-[2px] scale-70'
         : 'translate-y-[10px] scale-100'
