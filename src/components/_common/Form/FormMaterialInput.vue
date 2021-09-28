@@ -44,8 +44,10 @@ const onInput = (ev: any): void => { emit('update:modelValue', ev.target.value) 
 <template>
   <label
     :for="id"
-    class="relative inline-block w-full border bg-$primary"
-    :class="{'border-$rare': isFocus && !disabled}"
+    class="relative inline-block w-full rounded-[4px] bg-$secondary"
+    :style="{
+      boxShadow: isFocus && !disabled ? '0 0 0 .2rem var(--primary)' : 'none',
+    }"
   >
     <input
       :id="id"
@@ -64,7 +66,10 @@ const onInput = (ev: any): void => { emit('update:modelValue', ev.target.value) 
         ? 'translate-y-[2px] scale-70'
         : 'translate-y-[10px] scale-100'
       "
-      style="transition: transform var(--transition); transform-origin: top left;"
+      :style="{
+        transition: '.35s cubic-bezier(0.175,0.885,0.32,1)',
+        transformOrigin: 'top left',
+      }"
     >
       {{ placeholder }}
     </span>
