@@ -2,7 +2,10 @@ import { defineStore } from 'pinia'
 
 export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculator-offline-store', {
   state: (): any => ({
-    munchkins: [],
+    munchkins: localStorage.getItem('munchkin-calculator-offline-store')
+      // @ts-ignore
+      ? JSON.parse(localStorage.getItem('munchkin-calculator-offline-store'))
+      : [],
   }),
   getters: {
     getMunchkins(): Array<any> {
@@ -10,14 +13,22 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
     },
   },
   actions: {
-    addMunchkin(munchkinName: string): void {
+    commit() {
+      localStorage.setItem('munchkin-calculator-offline-store', JSON.stringify(this.munchkins))
+    },
+
+    addMunchkin(munchkin: any): void {
+      const { name, originSex } = munchkin
       const newMunchkin = {
-        uid: `local${Date.now()}`,
+        uid: `munchkinLocal${Date.now()}`,
+        name,
+        originSex,
+        currentSex: originSex,
         level: 1,
         gear: 0,
-        name: munchkinName,
       }
       this.munchkins.push(newMunchkin)
+      this.commit()
     },
   },
 })

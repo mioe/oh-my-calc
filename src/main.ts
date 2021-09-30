@@ -13,6 +13,7 @@ import pinia from '@/plugins/pinia'
 /**
  * Styles
  */
+import 'mosha-vue-toastify/dist/style.css'
 import 'virtual:windi.css' // windicss demon
 import '@/assets/sass/main.sass'
 

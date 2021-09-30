@@ -1,4 +1,9 @@
 {
   "hello": "Hello",
-  "munchkinCalculatorOffline": "Munchkin Calculator (offline)"
+  "munchkinCalculatorOffline": "Munchkin Calculator (offline)",
+  "addNewMunchkin": "Add new Munchkin",
+  "addingANewMunchkin": "Adding a new Munchkin",
+  "name": "Name",
+  "add": "Add",
+  "success": "Success"
 }

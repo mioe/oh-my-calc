@@ -18,9 +18,17 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  autocomplete: {
+    type: String,
+    default: 'off',
+  },
   disabled: {
     type: Boolean,
     default: false,
+  },
+  required: {
+    type: Boolean,
+    default: undefined,
   },
 })
 
@@ -52,8 +60,10 @@ const onInput = (ev: any): void => { emit('update:modelValue', ev.target.value) 
     <input
       :id="id"
       :type="type"
+      :autocomplete="autocomplete"
       :value="modelValue"
       :disabled="disabled"
+      :required="required"
       placeholder=""
       class="clear w-full min-h-[34px] px-[10px] pt-[16px] pb-[2px] text-[16px] focus:outline-none bg-transparent"
       @focus="onFocus"

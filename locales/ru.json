@@ -1,4 +1,9 @@
 {
   "hello": "Привет",
-  "munchkinCalculatorOffline": "Манчкин калькулятор (офлайн)"
+  "munchkinCalculatorOffline": "Манчкин калькулятор (офлайн)",
+  "addNewMunchkin": "Добавить нового Манчкина",
+  "addingANewMunchkin": "Добавления нового Манчкина",
+  "name": "Имя",
+  "add": "Добавить",
+  "success": "Успех"
 }
