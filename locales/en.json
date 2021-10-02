@@ -7,5 +7,9 @@
   "add": "Add",
   "success": "Success",
   "remove": "Remove",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "hide": "Hide",
+  "confirmRemoveMunchkin": "Confirm that you want to remove the Munchkin",
+  "edit": "Edit",
+  "editingAMunchkin": "Editing a Munchkin"
 }

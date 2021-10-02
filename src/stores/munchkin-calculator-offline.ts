@@ -17,7 +17,7 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
       localStorage.setItem('munchkin-calculator-offline-store', JSON.stringify(this.munchkins))
     },
 
-    addMunchkin(munchkin: any): void {
+    createMunchkin(munchkin: any): void {
       const { name, originSex } = munchkin
       const newMunchkin = {
         uid: `munchkinLocal${Date.now()}`,
@@ -39,5 +39,15 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
         this.commit()
       }
     },
+
+    editMunchkin(munchkin: any): void {
+      const { uid, name, originSex } = munchkin
+      const find = this.munchkins.find((m: any) => m.uid === uid)
+      if (find) {
+        find.name = name
+        find.originSex = originSex
+        this.commit()
+      }
+    }
   },
 })

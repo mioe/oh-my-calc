@@ -6,6 +6,10 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  isFocus: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits([
@@ -20,6 +24,9 @@ const handleClick = ():void => {
 <template>
   <button
     class="flex flex-col"
+    :style="{
+      boxShadow: isFocus ? '0 0 0 .2rem var(--primary)' : 'none'
+    }"
     @click="handleClick()"
   >
     <div class="w-full bg-$secondary rounded-t-[4px] px-[16px] py-[8px]">

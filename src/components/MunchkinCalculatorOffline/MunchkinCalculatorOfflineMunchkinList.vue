@@ -6,6 +6,10 @@ defineProps({
     type: Array as PropType<Array<any>>,
     default: () => ([]),
   },
+  selectedMunchkin: {
+    type: Object,
+    default: null,
+  },
 })
 
 const emit = defineEmits([
@@ -23,6 +27,7 @@ const handleFocus = (munchkin: any):void => {
       v-for="(m, idx) in munchkins"
       :key="idx"
       :munchkin="m"
+      :is-focus="selectedMunchkin && (selectedMunchkin.uid === m.uid)"
       @handle-focus="handleFocus"
     />
   </section>
