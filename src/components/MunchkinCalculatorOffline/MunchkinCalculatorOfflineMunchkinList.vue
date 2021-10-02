@@ -7,14 +7,23 @@ defineProps({
     default: () => ([]),
   },
 })
+
+const emit = defineEmits([
+  'handle-focus',
+])
+
+const handleFocus = (munchkin: any):void => {
+  emit('handle-focus', munchkin)
+}
 </script>
 
 <template>
   <section class="grid gap-[8px]">
-    <MunchkinCard
+    <MunchkinCalculatorOfflineCard
       v-for="(m, idx) in munchkins"
       :key="idx"
       :munchkin="m"
+      @handle-focus="handleFocus"
     />
   </section>
 </template>

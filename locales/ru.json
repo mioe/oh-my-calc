@@ -5,5 +5,7 @@
   "addingANewMunchkin": "Добавления нового Манчкина",
   "name": "Имя",
   "add": "Добавить",
-  "success": "Успех"
+  "success": "Успех",
+  "remove": "Удалить",
+  "cancel": "Отменить"
 }

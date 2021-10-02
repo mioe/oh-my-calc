@@ -22,6 +22,10 @@ const props = defineProps({
     type: String,
     default: 'off',
   },
+  step: {
+    type: String,
+    default: undefined,
+  },
   disabled: {
     type: Boolean,
     default: false,
@@ -64,6 +68,7 @@ const onInput = (ev: any): void => { emit('update:modelValue', ev.target.value) 
       :value="modelValue"
       :disabled="disabled"
       :required="required"
+      :step="step"
       placeholder=""
       class="clear w-full min-h-[34px] px-[10px] pt-[16px] pb-[2px] text-[16px] focus:outline-none bg-transparent"
       @focus="onFocus"

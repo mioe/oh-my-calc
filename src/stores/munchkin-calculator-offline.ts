@@ -30,5 +30,14 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
       this.munchkins.push(newMunchkin)
       this.commit()
     },
+
+    removeMunchkin(munchkin: any): void {
+      const { uid } = munchkin
+      const findIdx = this.munchkins.findIndex((m: any) => m.uid === uid)
+      if (findIdx !== -1) {
+        this.munchkins.splice(findIdx, 1)
+        this.commit()
+      }
+    },
   },
 })

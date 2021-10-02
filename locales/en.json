@@ -5,5 +5,7 @@
   "addingANewMunchkin": "Adding a new Munchkin",
   "name": "Name",
   "add": "Add",
-  "success": "Success"
+  "success": "Success",
+  "remove": "Remove",
+  "cancel": "Cancel"
 }
