@@ -16,3 +16,10 @@ input,
 textarea,
 select
   font-weight: inherit
+
+input.focused,
+textarea.focused,
+select.focused
+  &:focus
+    outline: none
+    box-shadow: 0 0 0 .2rem var(--primary)

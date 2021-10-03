@@ -48,6 +48,6 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
         find.originSex = originSex
         this.commit()
       }
-    }
+    },
   },
 })
