@@ -97,8 +97,10 @@ const handleEdit = () => {
   <ModalDefault v-model="isOpenModalRemove">
     <section class="w-full max-w-[320px] mx-auto px-[16px] py-[24px] rounded-[4px] bg-$document">
       <header class="mb-[24px] space-y-[16px]">
-        <p>{{ t('confirmRemoveMunchkin') }}?</p>
-        <p>
+        <p class="leading-[1.25]">
+          {{ t('confirmRemoveMunchkin') }}?
+        </p>
+        <p class="truncate">
           {{ t('name') }}: <span class="font-medium">{{ selectedMunchkin.name }}</span>
         </p>
       </header>
