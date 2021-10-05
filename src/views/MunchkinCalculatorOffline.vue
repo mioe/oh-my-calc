@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ComputedRef, ref, Ref, nextTick } from 'vue'
+import { computed, ComputedRef, ref, Ref, nextTick, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { toast } from '@/use/useToast'
 import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
@@ -87,7 +87,7 @@ const handleEdit = () => {
   >
     <MunchkinCalculatorOfflinePanel
       v-if="selectedMunchkin"
-      :munchkin="selectedMunchkin"
+      v-model="selectedMunchkin"
       @handle-remove="handleRemove"
       @handle-edit="handleEdit"
       @handle-hide="selectedMunchkin = null"

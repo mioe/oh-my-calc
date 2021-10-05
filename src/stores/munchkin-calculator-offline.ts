@@ -26,6 +26,8 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
         currentSex: originSex,
         level: 1,
         gear: 0,
+        class: null,
+        race: null,
       }
       this.munchkins.push(newMunchkin)
       this.commit()
@@ -41,11 +43,25 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
     },
 
     editMunchkin(munchkin: any): void {
-      const { uid, name, originSex } = munchkin
+      const {
+        uid,
+        name,
+        originSex,
+        currentSex,
+        level,
+        gear,
+        class: munchkinClass,
+        race,
+      } = munchkin
       const find = this.munchkins.find((m: any) => m.uid === uid)
       if (find) {
-        find.name = name
-        find.originSex = originSex
+        find.name = name || find.name
+        find.originSex = originSex || find.originSex
+        find.currentSex = currentSex || find.currentSex
+        find.level = level || find.level
+        find.gear = gear || find.gear
+        find.class = munchkinClass || find.class
+        find.race = race || find.race
         this.commit()
       }
     },

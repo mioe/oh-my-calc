@@ -6,8 +6,8 @@ const { t } = useI18n()
 const { width, height } = useWindowSize()
 const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.value)
 
-defineProps({
-  munchkin: {
+const props = defineProps({
+  modelValue: {
     type: Object,
     default: null,
   },
@@ -17,16 +17,27 @@ const levelHook: Ref<any> = ref(null)
 const gearHook: Ref<any> = ref(null)
 
 const emit = defineEmits([
+  'update:modelValue',
   'handle-remove',
   'handle-edit',
   'handle-hide',
 ])
 
+const onChangeCounter = (event: any ,hook: 'gear' | 'level') => {
+  const obj = {
+    ...props.modelValue,
+    [`${hook}`]: Number(event.target.value),
+  }
+  emit('update:modelValue', obj)
+}
+
 const handleIncrement = (hook: 'gear' | 'level') => {
   if (hook === 'level') {
     levelHook.value.stepUp()
+    onChangeCounter({ target: levelHook.value }, 'level')
   } else if (hook === 'gear') {
     gearHook.value.stepUp()
+    onChangeCounter({ target: gearHook.value }, 'gear')
   }
 }
 
@@ -37,11 +48,27 @@ const handleDecrement = (hook: 'gear' | 'level') => {
     gearHook.value.stepDown()
   }
 }
+
+const handleSex = (sex: boolean) => {
+  const obj = {
+    ...props.modelValue,
+    currentSex: sex,
+  }
+  emit('update:modelValue', obj)
+}
+
+const onBlurSelect = (event: any, hook: 'class' | 'race') => {
+  const obj = {
+    ...props.modelValue,
+    [`${hook}`]: event.target.value !== 'null' ? event.target.value : null,
+  }
+  emit('update:modelValue', obj)
+}
 </script>
 
 <template>
   <section
-    v-if="munchkin"
+    v-if="modelValue"
     class="fixed z-1 left-0 bg-$document w-full py-[8px] px-[16px] border-t-3 border-$primary space-y-[16px]"
     :style="{
       bottom: isPortrait ? '0px' : '48px'
@@ -49,7 +76,7 @@ const handleDecrement = (hook: 'gear' | 'level') => {
   >
     <div class="flex items-center justify-between space-x-[8px]">
       <h2 class="block flex-1 w-full truncate font-medium text-[16px]">
-        {{ munchkin.name }}
+        {{ modelValue.name }}
       </h2>
       <div class="space-x-[8px]">
         <button
@@ -88,7 +115,7 @@ const handleDecrement = (hook: 'gear' | 'level') => {
         </button>
         <label class="relative flex flex-col max-w-[60px]">
           <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
-            Level
+            {{ t('level') }}
           </span>
           <input
             ref="levelHook"
@@ -96,8 +123,9 @@ const handleDecrement = (hook: 'gear' | 'level') => {
             min="1"
             max="10"
             step="1"
-            :value="munchkin.level"
+            :value="modelValue.level"
             class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
+            @change="onChangeCounter($event, 'level')"
           >
         </label>
         <button
@@ -111,45 +139,55 @@ const handleDecrement = (hook: 'gear' | 'level') => {
       <div class="flex-1 w-full flex flex-col space-y-[8px]">
         <div class="w-full flex items-center space-x-[8px]">
           <p class="text-$typography-secondary">
-            Sex:
+            {{ t('sex') }}:
           </p>
           <button
             :style="{
-              backgroundColor: `var(${munchkin.currentSex === true
+              backgroundColor: `var(${modelValue.currentSex === true
                 ? '--primary' : '--secondary'})`,
             }"
+            @click="handleSex(true)"
           >
             <icon-twemoji:male-sign class="w-[20px] h-[20px]" />
           </button>
           <button
             :style="{
-              backgroundColor: `var(${munchkin.currentSex === false
+              backgroundColor: `var(${modelValue.currentSex === false
                 ? '--primary' : '--secondary'})`,
             }"
+            @click="handleSex(false)"
           >
             <icon-twemoji:female-sign class="w-[20px] h-[20px]" />
           </button>
-          <p class="text-$typography-secondary opacity-25">
-            ({{ munchkin.currentSex ? 'male' : 'female' }})
+          <p class="text-$typography-secondary opacity-25 lowercase">
+            ({{ modelValue.currentSex ? t('male') : t('female') }})
           </p>
         </div>
         <div class="w-full">
           <label class="relative flex flex-col">
             <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
-              Class
+              {{ t('class') }}
             </span>
-            <select class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused">
-              <option :value="null">Нет класса</option>
+            <select
+              class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
+              @blur="onBlurSelect($event, 'class')"
+            >
+              <option value="null">Нет класса</option>
+              <option value="war">War</option>
             </select>
           </label>
         </div>
         <div class="w-full">
           <label class="relative flex flex-col">
             <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
-              Race
+              {{ t('race') }}
             </span>
-            <select class="w-full min-h-[32px] px-[10px] pt-[14px] rounded-[4px] bg-$secondary text-[12px] text-center focused">
-              <option :value="null">Нет рассы</option>
+            <select
+              class="w-full min-h-[32px] px-[10px] pt-[14px] rounded-[4px] bg-$secondary text-[12px] text-center focused"
+              @blur="onBlurSelect($event, 'race')"
+            >
+              <option value="null">Нет рассы</option>
+              <option value="dd">DD</option>
             </select>
           </label>
         </div>
@@ -164,7 +202,7 @@ const handleDecrement = (hook: 'gear' | 'level') => {
         </button>
         <label class="relative flex flex-col  max-w-[60px]">
           <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
-            Gear
+            {{ t('gear') }}
           </span>
           <input
             ref="gearHook"
@@ -172,8 +210,9 @@ const handleDecrement = (hook: 'gear' | 'level') => {
             min="0"
             max="99"
             step="1"
-            :value="munchkin.gear"
+            :value="modelValue.gear"
             class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
+            @change="onChangeCounter($event, 'gear')"
           >
         </label>
         <button

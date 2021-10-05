@@ -11,5 +11,12 @@
   "hide": "Hide",
   "confirmRemoveMunchkin": "Confirm that you want to remove the Munchkin",
   "edit": "Edit",
-  "editingAMunchkin": "Editing a Munchkin"
+  "editingAMunchkin": "Editing a Munchkin",
+  "class": "Class",
+  "race": "Race",
+  "level": "Level",
+  "sex": "Sex",
+  "male": "Male",
+  "female": "Female",
+  "gear": "Gear"
 }
