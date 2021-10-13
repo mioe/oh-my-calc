@@ -23,7 +23,7 @@ const handleClick = ():void => {
 
 <template>
   <button
-    class="flex flex-col"
+    class="button-default flex flex-col"
     :style="{
       boxShadow: isFocus ? '0 0 0 .2rem var(--primary)' : 'none'
     }"

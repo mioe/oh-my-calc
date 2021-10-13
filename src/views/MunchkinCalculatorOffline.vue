@@ -115,13 +115,14 @@ const handleEdit = () => {
       >
         <div class="flex items-center justify-end space-x-[8px]">
           <button
+            class="button-default"
             style="padding: 0 16px;"
             @click="handleRemoveMunchkin()"
           >
             {{ t('cancel') }}
           </button>
           <button
-            class="clear min-h-[32px] px-[16px] rounded-[4px] bg-$primary text-white"
+            class="button-default clear min-h-[32px] px-[16px] rounded-[4px] bg-$primary text-white"
             @click="handleRemoveMunchkin(true)"
           >
             {{ t('remove') }}

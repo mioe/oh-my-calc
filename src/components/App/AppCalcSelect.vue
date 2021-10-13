@@ -23,7 +23,7 @@ const handleBlur = () => {
 </script>
 
 <template>
-  <button class="relative w-full" @click="isOpen = !isOpen" @blur="handleBlur">
+  <button class="button-default relative w-full" @click="isOpen = !isOpen" @blur="handleBlur">
     <span class="font-medium truncate">
       <template v-if="route.name === 'Home'">
         OhMy<span class="text-$primary">Calc</span>

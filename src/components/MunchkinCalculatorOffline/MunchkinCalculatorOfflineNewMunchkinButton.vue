@@ -9,7 +9,7 @@ const emit = defineEmits([
 
 <template>
   <button
-    class="space-x-[8px]"
+    class="button-default space-x-[8px]"
     @click="emit('handle-create')"
   >
     <icon-carbon:add-alt />

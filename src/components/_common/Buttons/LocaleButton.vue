@@ -13,7 +13,7 @@ const toggleLocales = (): void => {
 
 <template>
   <button
-    class="uppercase"
+    class="button-default uppercase"
     @click="toggleLocales()"
   >
     {{ locale }}

@@ -53,8 +53,8 @@ export default defineConfig(({ command, mode }) => {
           name: 'OhMyCalc',
           short_name: 'OhMyCalc',
           description: 'Calculator for the games',
-          theme_color: '#000000',
-          background_color: '#ff762d',
+          theme_color: '#1f1f1f',
+          background_color: '#1f1f1f',
           icons: [
             {
               src: '/favicons/pwa-192x192.png',

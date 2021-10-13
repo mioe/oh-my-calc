@@ -82,7 +82,7 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
       </h2>
       <div class="space-x-[8px]">
         <button
-          class="space-x-[4px]"
+          class="button-default space-x-[4px]"
           @click="emit('handle-hide')"
         >
           <icon-carbon:previous-outline />
@@ -91,16 +91,19 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
           </span>
         </button>
         <button
+          class="button-default"
           @click="emit('handle-hide')"
         >
           <icon-carbon:accessibility-alt />
         </button>
         <button
+          class="button-default"
           @click="emit('handle-edit')"
         >
           <icon-carbon:edit />
         </button>
         <button
+          class="button-default"
           @click="emit('handle-remove')"
         >
           <icon-carbon:delete />
@@ -110,7 +113,7 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
     <div class="flex items-start space-x-[16px] justify-between">
       <div class="inline-flex flex-col items-center space-y-[8px]">
         <button
-          class="w-full"
+          class="button-default w-full"
           @click="handleIncrement('level')"
         >
           +
@@ -131,7 +134,7 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
           >
         </label>
         <button
-          class="w-full"
+          class="button-default w-full"
           @click="handleDecrement('level')"
         >
           -
@@ -144,6 +147,7 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
             {{ t('sex') }}:
           </p>
           <button
+            class="button-default"
             :style="{
               backgroundColor: `var(${modelValue.currentSex === true
                 ? '--primary' : '--secondary'})`,
@@ -153,6 +157,7 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
             <icon-twemoji:male-sign class="w-[20px] h-[20px]" />
           </button>
           <button
+            class="button-default"
             :style="{
               backgroundColor: `var(${modelValue.currentSex === false
                 ? '--primary' : '--secondary'})`,
@@ -197,7 +202,7 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
 
       <div class="inline-flex flex-col items-center space-y-[8px]">
         <button
-          class="w-full"
+          class="button-default w-full"
           @click="handleIncrement('gear')"
         >
           +
@@ -218,7 +223,7 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
           >
         </label>
         <button
-          class="w-full"
+          class="button-default w-full"
           @click="handleDecrement('gear')"
         >
           -

@@ -4,6 +4,7 @@ import { isDark, toggleDark } from '@/plugins/dark-mode'
 
 <template>
   <button
+    class="button-default"
     @click="toggleDark()"
   >
     <icon-carbon-moon v-if="isDark" />
