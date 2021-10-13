@@ -18,6 +18,12 @@ import 'virtual:windi.css' // windicss demon
 import '@/assets/sass/main.sass'
 
 /**
+ * PWA
+ */
+import { useRegisterSW } from 'virtual:pwa-register/vue'
+useRegisterSW()
+
+/**
  * init app
  */
 createApp(App)

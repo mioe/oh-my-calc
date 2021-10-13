@@ -44,8 +44,10 @@ const handleIncrement = (hook: 'gear' | 'level') => {
 const handleDecrement = (hook: 'gear' | 'level') => {
   if (hook === 'level') {
     levelHook.value.stepDown()
+    onChangeCounter({ target: levelHook.value }, 'level')
   } else if (hook === 'gear') {
     gearHook.value.stepDown()
+    onChangeCounter({ target: gearHook.value }, 'gear')
   }
 }
 

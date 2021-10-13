@@ -47,12 +47,14 @@ export default defineConfig(({ command, mode }) => {
 
       // https://github.com/antfu/vite-plugin-pwa
       VitePWA({
+        registerType: 'autoUpdate',
         includeAssets: ['/favicons/favicon.svg', '/favicons/favicon.ico', 'robots.txt', '/favicons/apple-touch-icon.png'],
         manifest: {
           name: 'OhMyCalc',
           short_name: 'OhMyCalc',
           description: 'Calculator for the games',
           theme_color: '#000000',
+          background_color: '#ff762d',
           icons: [
             {
               src: '/favicons/pwa-192x192.png',

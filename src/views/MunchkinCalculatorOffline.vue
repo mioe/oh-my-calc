@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ComputedRef, ref, Ref, nextTick, watch } from 'vue'
+import { computed, ComputedRef, ref, Ref, nextTick, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { toast } from '@/use/useToast'
 import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
@@ -12,6 +12,12 @@ const selectedMunchkin: Ref<any> = ref(null)
 const handleFocus = (munchkin: any): void => {
   selectedMunchkin.value = munchkin
 }
+watchEffect(() => {
+  console.log('🦕 watchEffect')
+  if (selectedMunchkin.value !== null) {
+    editMunchkin(selectedMunchkin.value)
+  }
+})
 
 const isOpenModalRemove: Ref<boolean> = ref(false)
 const handleRemove = () => {
