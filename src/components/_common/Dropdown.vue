@@ -45,6 +45,7 @@ const localPositionX: Ref<string> = ref(props.positionX)
 const localPositionY: Ref<string> = ref(props.positionY)
 
 const toggle = () => {
+  if (props.disabled) return
   isOpen.value = !isOpen.value
   if (isOpen.value) {
     nextTick(() => {
@@ -85,13 +86,14 @@ const menuHook: Ref<Element | null> = ref(null)
 
 const getOverflow = () => {
   const menuRect = menuHook.value?.getBoundingClientRect() || { bottom: 0, top: 0, left: 0, right: 0 }
-  const spacing = 40
+  const spacingX = 40
+  const spacingY = 80
 
   return {
-    left: menuRect.right + spacing > window.innerWidth,
-    right: menuRect.left - spacing < 0,
-    bottom: menuRect.bottom + spacing > window.innerHeight,
-    top: menuRect.top - spacing < 0,
+    left: menuRect.right + spacingX > window.innerWidth,
+    right: menuRect.left - spacingX < 0,
+    bottom: menuRect.bottom + spacingY > window.innerHeight,
+    top: menuRect.top - spacingY < 0,
   }
 }
 

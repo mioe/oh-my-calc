@@ -16,6 +16,13 @@ const routes = [
     path: '/testing',
     name: 'Testing',
     component: () => import('@/views/Testing.vue'),
+    children: [
+      {
+        path: 'dropdown',
+        name: 'TestingDropdown',
+        component: () => import('@/views/Testing/TestingDropdown.vue'),
+      },
+    ],
   },
   {
     path: '/:pathMatch(.*)*',

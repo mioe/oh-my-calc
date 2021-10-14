@@ -73,9 +73,28 @@ const handleEdit = () => {
 
 <template>
   <main class="px-[16px] py-[8px] flex flex-col space-y-[20px]">
-    <MunchkinCalculatorOfflineNewMunchkinButton
-      @handle-create="handleCreate()"
-    />
+    <div class="flex space-x-[8px]">
+      <MunchkinCalculatorOfflineNewMunchkinButton
+        class="w-full"
+        @handle-create="handleCreate()"
+      />
+      <Dropdown>
+        <template #header="scope">
+          <button
+            class="button-default"
+            @click="scope.toggle"
+          >
+            <icon-bi:three-dots-vertical />
+          </button>
+        </template>
+        <template #menu="scope">
+          <div>
+            {{ scope }}
+          </div>
+        </template>
+      </Dropdown>
+    </div>
+
     <MunchkinCalculatorOfflineMunchkinList
       :munchkins="munchkins"
       :selected-munchkin="selectedMunchkin"
