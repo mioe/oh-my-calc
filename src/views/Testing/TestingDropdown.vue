@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ref, Ref, computed, ComputedRef } from 'vue'
+import { ref, Ref } from 'vue'
 
 const positionX: Ref<string> = ref('left')
 const positionY: Ref<string> = ref('bottom')
-const maxHeight: Ref<number> = ref(260)
 const keepOnContentClick: Ref<boolean> = ref(false)
 const disabled: Ref<boolean> = ref(false)
 </script>
@@ -38,12 +37,6 @@ const disabled: Ref<boolean> = ref(false)
         </label>
       </div>
       <div>
-        <span>maxHeight: </span>
-        <label>
-          <input v-model="maxHeight" type="number" class="bg-$secondary text-center px-[8px] py-[4px]">
-        </label>
-      </div>
-      <div>
         <span>keepOnContentClick: </span>
         <label>
           <input v-model="keepOnContentClick" type="checkbox">
@@ -60,16 +53,16 @@ const disabled: Ref<boolean> = ref(false)
       <Dropdown
         :position-x="positionX"
         :position-y="positionY"
-        :max-height="maxHeight"
         :keep-on-content-click="keepOnContentClick"
         :disabled="disabled"
       >
         <template #header="scope">
           <button
-            class="button-default"
+            class="button-default space-x-[4px]"
             @click="scope.toggle"
           >
-            Dropdown
+            <span>Dropdown</span>
+            <icon-carbon:chevron-down />
           </button>
         </template>
         <template #menu="scope">
@@ -83,6 +76,51 @@ const disabled: Ref<boolean> = ref(false)
           </p>
         </template>
       </Dropdown>
+    </div>
+    <div>
+      <!-- eslint-disable -->
+      <p class="text-[24px] text-center">
+        👇👇👇
+      </p>
+      <!-- eslint-enable -->
+    </div>
+    <div class="pt-[700px] pb-[700px]">
+      <div class="flex justify-between">
+        <Dropdown
+          v-for="i in 3"
+          :key="`${i}`"
+          :position-x="positionX"
+          :position-y="positionY"
+          :keep-on-content-click="keepOnContentClick"
+          :disabled="disabled"
+        >
+          <template #header="scope">
+            <button
+              class="button-default space-x-[4px]"
+              @click="scope.toggle"
+            >
+              <icon-bi:three-dots-vertical />
+            </button>
+          </template>
+          <template #menu="scope">
+            <p class="whitespace-nowrap">
+              <span class="text-$primary">propPositions: </span>
+              {{ positionX }} {{ positionY }}
+            </p>
+            <p class="whitespace-nowrap">
+              <span class="text-$primary">transformOrigin: </span>
+              {{ scope.transformOrigin.localPositionX }} {{ scope.transformOrigin.localPositionY }}
+            </p>
+          </template>
+        </Dropdown>
+      </div>
+    </div>
+    <div>
+      <!-- eslint-disable -->
+      <p class="text-[24px] text-center pb-[20px]">
+        👆👆👆
+      </p>
+      <!-- eslint-enable -->
     </div>
   </section>
 </template>

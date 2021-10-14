@@ -6,6 +6,7 @@ const props = defineProps({
     type: Object,
     default: () => ({
       padding: '8px',
+      maxHeight: '260px',
     }),
   },
   positionX: {
@@ -17,10 +18,6 @@ const props = defineProps({
     type: String,
     default: 'bottom',
     validator: (x: string) => ['top', 'bottom'].indexOf(x) !== -1,
-  },
-  maxHeight: {
-    type: [Number, String],
-    default: 260,
   },
   keepOnContentClick: {
     type: Boolean,
@@ -156,7 +153,6 @@ const stateClasses: ComputedRef<any> = computed(() => {
         class="mi-dropdown--menu absolute z-2 min-w-[160px] rounded-[4px] bg-$secondary overflow-x-hidden overflow-y-auto"
         :style="{
           transformOrigin: `${localPositionX} ${localPositionY}`,
-          maxHeight: maxHeight + 'px',
           boxShadow: '0 22px 70px 4px rgba(0, 0, 0, 0.56)',
           ...menuStyles,
         }"
