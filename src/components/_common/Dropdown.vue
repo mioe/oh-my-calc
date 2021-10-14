@@ -2,11 +2,12 @@
 import { ref, Ref, nextTick, onMounted, onBeforeUnmount, computed, ComputedRef } from 'vue'
 
 const props = defineProps({
-  transformOrigin: {
+  positionX: {
     type: String,
-    default: 'left top',
+    default: 'left',
+    validator: (x: string) => ['right', 'left'].indexOf(x) !== -1,
   },
-  position: {
+  positionY: {
     type: String,
     default: 'bottom',
     validator: (x: string) => ['top', 'bottom'].indexOf(x) !== -1,
@@ -34,27 +35,42 @@ onBeforeUnmount(() => {
 })
 
 const isOpen: Ref<boolean> = ref(false)
-const localPosition: Ref<string> = ref(props.position)
+const localPositionX: Ref<string> = ref(props.positionX)
+const localPositionY: Ref<string> = ref(props.positionY)
 
 const toggle = () => {
   isOpen.value = !isOpen.value
   if (isOpen.value) {
     nextTick(() => {
-      checkRePosition()
+      checkRePositionX()
+      checkRePositionY()
     })
   }
 }
 
-const checkRePosition = () => {
+const checkRePositionX = () => {
   const overflow = getOverflow()
-  if (props.position === 'top' && overflow.top) {
-    localPosition.value = 'bottom'
+  if (props.positionX === 'right' && overflow.right) {
+    localPositionX.value = 'left'
   }
-  else if (props.position === 'bottom' && overflow.bottom) {
-    localPosition.value = 'top'
+  else if (props.positionX === 'left' && overflow.left) {
+    localPositionX.value = 'right'
   }
   else {
-    resetPosition()
+    resetPositionX()
+  }
+}
+
+const checkRePositionY = () => {
+  const overflow = getOverflow()
+  if (props.positionY === 'top' && overflow.top) {
+    localPositionY.value = 'bottom'
+  }
+  else if (props.positionY === 'bottom' && overflow.bottom) {
+    localPositionY.value = 'top'
+  }
+  else {
+    resetPositionY()
   }
 }
 
@@ -62,17 +78,28 @@ const headerHook: Ref<Element | null> = ref(null)
 const menuHook: Ref<Element | null> = ref(null)
 
 const getOverflow = () => {
-  const menuRect = menuHook.value?.getBoundingClientRect() || { bottom: 0, top: 0 }
+  const menuRect = menuHook.value?.getBoundingClientRect() || { bottom: 0, top: 0, left: 0, right: 0 }
   const spacing = 40
 
   return {
+    left: menuRect.right + spacing > window.innerWidth,
+    right: menuRect.left - spacing < 0,
     bottom: menuRect.bottom + spacing > window.innerHeight,
     top: menuRect.top - spacing < 0,
   }
 }
 
-const resetPosition = () => {
-  localPosition.value = props.position
+const resetPositionX = () => {
+  localPositionX.value = props.positionX
+}
+
+const resetPositionY = () => {
+  localPositionY.value = props.positionY
+}
+
+const resetPositions = () => {
+  resetPositionX()
+  resetPositionY()
 }
 
 const handleClickaway = (ev: any) => {
@@ -85,9 +112,11 @@ const handleClickaway = (ev: any) => {
 }
 
 const stateClasses: ComputedRef<any> = computed(() => {
-  const positionClass = `position-${localPosition.value}`
+  const positionXClass = `position-${localPositionX.value}`
+  const positionYClass = `position-${localPositionY.value}`
   return {
-    [positionClass]: true,
+    [positionXClass]: true,
+    [positionYClass]: true,
     'is-open': isOpen.value,
     'is-disabled': props.disabled,
   }
@@ -110,7 +139,7 @@ const stateClasses: ComputedRef<any> = computed(() => {
       leave-active-class="transition ease-in duration-75"
       leave-from-class="transform opacity-100 scale-100"
       leave-to-class="transform opacity-0 scale-95"
-      @after-leave="resetPosition"
+      @after-leave="resetPositions"
     >
       <div
         v-show="isOpen"
@@ -118,21 +147,26 @@ const stateClasses: ComputedRef<any> = computed(() => {
         role="menu"
         class="mi-dropdown--menu absolute z-2 min-w-[160px] p-[18px] rounded-[4px] bg-$secondary overflow-x-hidden overflow-y-auto"
         :style="{
-          transformOrigin,
+          transformOrigin: `${localPositionX} ${localPositionY}`,
           maxHeight: maxHeight + 'px',
           boxShadow: '0 22px 70px 4px rgba(0, 0, 0, 0.56)',
         }"
       >
-        <slot name="menu" />
+        <slot name="menu" :transformOrigin="{ localPositionX ,localPositionY }" />
       </div>
     </transition>
   </div>
 </template>
 
-<style scoped lang="sass">
+<style lang="sass">
 .mi-dropdown
+  .mi-dropdown--menu
+    top: calc(100% + 10px)
   &.position-top
     .mi-dropdown--menu
-      top: 0
+      top: -10px
       transform: translateY(-100%)
+  &.position-right
+    .mi-dropdown--menu
+      right: 0
 </style>
