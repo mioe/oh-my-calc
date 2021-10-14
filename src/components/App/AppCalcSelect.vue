@@ -8,6 +8,7 @@ const route = useRoute()
 const isOpen: Ref<boolean> = ref(false)
 const routes = [
   { name: 'MunchkinCalculatorOffline', title: 'munchkinCalculatorOffline' },
+  { name: 'Testing', title: 'Testing' },
 ]
 
 const currentTitle: ComputedRef<string> = computed(() => {
