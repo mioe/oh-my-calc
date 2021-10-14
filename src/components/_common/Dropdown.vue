@@ -2,6 +2,12 @@
 import { ref, Ref, nextTick, onMounted, onBeforeUnmount, computed, ComputedRef } from 'vue'
 
 const props = defineProps({
+  menuStyles: {
+    type: Object,
+    default: () => ({
+      padding: '8px',
+    }),
+  },
   positionX: {
     type: String,
     default: 'left',
@@ -145,11 +151,12 @@ const stateClasses: ComputedRef<any> = computed(() => {
         v-show="isOpen"
         ref="menuHook"
         role="menu"
-        class="mi-dropdown--menu absolute z-2 min-w-[160px] p-[18px] rounded-[4px] bg-$secondary overflow-x-hidden overflow-y-auto"
+        class="mi-dropdown--menu absolute z-2 min-w-[160px] rounded-[4px] bg-$secondary overflow-x-hidden overflow-y-auto"
         :style="{
           transformOrigin: `${localPositionX} ${localPositionY}`,
           maxHeight: maxHeight + 'px',
           boxShadow: '0 22px 70px 4px rgba(0, 0, 0, 0.56)',
+          ...menuStyles,
         }"
       >
         <slot name="menu" :transformOrigin="{ localPositionX ,localPositionY }" />
@@ -160,8 +167,9 @@ const stateClasses: ComputedRef<any> = computed(() => {
 
 <style lang="sass">
 .mi-dropdown
-  .mi-dropdown--menu
-    top: calc(100% + 10px)
+  &:not(.position-top)
+    .mi-dropdown--menu
+      top: calc(100% + 10px)
   &.position-top
     .mi-dropdown--menu
       top: -10px
