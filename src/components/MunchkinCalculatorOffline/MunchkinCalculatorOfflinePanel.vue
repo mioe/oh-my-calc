@@ -5,6 +5,9 @@ import { useWindowSize } from '@vueuse/core'
 const { t } = useI18n()
 const { width, height } = useWindowSize()
 const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.value)
+import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
+const store = useMunchkinCalculatorOfflineStore()
+const { munchkinRaces, munchkinClasses } = store
 
 const props = defineProps({
   modelValue: {
@@ -66,7 +69,7 @@ const handleHide = () => {
 }
 
 
-const onBlurSelect = (event: any, hook: 'class' | 'race') => {
+const onChangeSelect = (event: any, hook: 'class' | 'race') => {
   const obj = {
     ...props.modelValue,
     [`${hook}`]: event.target.value !== 'null' ? event.target.value : null,
@@ -186,13 +189,22 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
             <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
               {{ t('class') }}
             </span>
+            <!-- eslint-disable -->
             <select
               class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
-              @blur="onBlurSelect($event, 'class')"
+              :value="modelValue.class"
+              @change="onChangeSelect($event, 'class')"
             >
-              <option value="null">Нет класса</option>
-              <option value="war">War</option>
+              <option value="">Нет класса</option>
+              <option
+                v-for="cls in munchkinClasses"
+                :key="cls"
+                :value="cls"
+              >
+                {{ t(cls) }}
+              </option>
             </select>
+            <!-- eslint-enable -->
           </label>
         </div>
         <div class="w-full">
@@ -200,13 +212,22 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
             <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
               {{ t('race') }}
             </span>
+            <!-- eslint-disable -->
             <select
               class="w-full min-h-[32px] px-[10px] pt-[14px] rounded-[4px] bg-$secondary text-[12px] text-center focused"
-              @blur="onBlurSelect($event, 'race')"
+              :value="modelValue.race"
+              @change="onChangeSelect($event, 'race')"
             >
-              <option value="null">Нет рассы</option>
-              <option value="dd">DD</option>
+              <option value="">Нет рассы</option>
+              <option
+                v-for="race in munchkinRaces"
+                :key="race"
+                :value="race"
+              >
+                {{ t(race) }}
+              </option>
             </select>
+            <!-- eslint-enable -->
           </label>
         </div>
       </div>

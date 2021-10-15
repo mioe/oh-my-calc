@@ -1,11 +1,31 @@
 import { defineStore } from 'pinia'
 
+const munchkinRaces = [
+  'elf',
+  'dwarf',
+  'halfling',
+  'orc',
+  'human',
+  'gnome',
+]
+
+const munchkinClasses = [
+  'wizard',
+  'warrior',
+  'cleric',
+  'thief',
+  'bard',
+  'ranger',
+]
+
 export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculator-offline-store', {
   state: (): any => ({
     munchkins: localStorage.getItem('munchkin-calculator-offline-store')
       // @ts-ignore
       ? JSON.parse(localStorage.getItem('munchkin-calculator-offline-store'))
       : [],
+    munchkinRaces,
+    munchkinClasses,
   }),
   getters: {
     getMunchkins(): Array<any> {
@@ -57,7 +77,7 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
       if (find) {
         find.name = name || find.name
         find.originSex = originSex || find.originSex
-        find.currentSex = currentSex || find.currentSex
+        find.currentSex = typeof currentSex === 'boolean' ? currentSex : find.currentSex
         find.level = level || find.level
         find.gear = gear || find.gear
         find.class = munchkinClass || find.class

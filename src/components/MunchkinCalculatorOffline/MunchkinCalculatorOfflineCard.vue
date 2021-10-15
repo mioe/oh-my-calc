@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const props = defineProps({
   munchkin: {
@@ -47,7 +48,11 @@ const handleClick = ():void => {
         {{ munchkin.name }}
       </p>
       <div class="text-$typography-secondary">
-        Class / Race
+        {{
+          [munchkin.class, munchkin.race].filter(e => e).length > 0
+            ? [munchkin.class, munchkin.race].filter(e => e).map(e => t(e)).join(' / ')
+            : t('human')
+        }}
       </div>
     </div>
     <div class="w-[30px]">

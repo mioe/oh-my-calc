@@ -44,7 +44,7 @@ const isFocus: Ref<boolean> = ref(false)
 
 const valueIsNotEmpty: ComputedRef<boolean> = computed(() =>
   props.modelValue
-    ? props.modelValue.length > 0
+    ? typeof props.modelValue === 'string' && props.modelValue.length > 0
     : false,
 )
 

@@ -18,5 +18,17 @@
   "sex": "Sex",
   "male": "Male",
   "female": "Female",
-  "gear": "Gear"
+  "gear": "Gear",
+  "wizard": "Wizard",
+  "warrior": "Warrior",
+  "cleric": "Cleric",
+  "thief": "Thief",
+  "bard": "Bard",
+  "ranger": "Ranger",
+  "elf": "Elf",
+  "dwarf": "Dwarf",
+  "halfling": "Halfling",
+  "orc": "Orc",
+  "human": "Human",
+  "gnome": "Gnome"
 }
