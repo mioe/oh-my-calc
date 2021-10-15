@@ -59,6 +59,13 @@ const handleSex = (sex: boolean) => {
   emit('update:modelValue', obj)
 }
 
+const isSpecialTabOpen: Ref<boolean> = ref(false)
+
+const handleHide = () => {
+  emit('handle-hide')
+}
+
+
 const onBlurSelect = (event: any, hook: 'class' | 'race') => {
   const obj = {
     ...props.modelValue,
@@ -71,19 +78,19 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
 <template>
   <section
     v-if="modelValue"
-    class="fixed z-1 left-0 bg-$document w-full py-[8px] px-[16px] border-t-3 border-$primary space-y-[16px]"
+    class="fixed z-1 left-0 bg-$document w-full py-[8px] border-t-3 border-$primary space-y-[16px]"
     :style="{
       bottom: isPortrait ? '0px' : '48px'
     }"
   >
-    <div class="flex items-center justify-between space-x-[8px]">
+    <div class="max-w-[1200px] px-[16px] mx-auto flex items-center justify-between space-x-[8px]">
       <h2 class="block flex-1 w-full truncate font-medium text-[16px]">
         {{ modelValue.name }}
       </h2>
       <div class="space-x-[8px]">
         <button
           class="button-default space-x-[4px]"
-          @click="emit('handle-hide')"
+          @click="handleHide"
         >
           <icon-carbon:previous-outline />
           <span>
@@ -92,7 +99,11 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
         </button>
         <button
           class="button-default"
-          @click="emit('handle-hide')"
+          :style="{
+            backgroundColor: isSpecialTabOpen ? 'var(--primary)' : undefined,
+            color: isSpecialTabOpen ? 'white' : undefined,
+          }"
+          @click="isSpecialTabOpen = !isSpecialTabOpen"
         >
           <icon-carbon:accessibility-alt />
         </button>
@@ -110,7 +121,7 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
         </button>
       </div>
     </div>
-    <div class="flex items-start space-x-[16px] justify-between">
+    <div v-if="!isSpecialTabOpen" class="max-w-[1200px] h-[118px] px-[16px] mx-auto flex items-start space-x-[16px] justify-between">
       <div class="inline-flex flex-col items-center space-y-[8px]">
         <button
           class="button-default w-full"
@@ -229,6 +240,10 @@ const onBlurSelect = (event: any, hook: 'class' | 'race') => {
           -
         </button>
       </div>
+    </div>
+    <div v-else class="max-w-[1200px] h-[118px] px-[16px] mx-auto space-x-[16px]">
+      isSpecialTabOpen: {{ isSpecialTabOpen }}
+      # todo
     </div>
   </section>
 </template>

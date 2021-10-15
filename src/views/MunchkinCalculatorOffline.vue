@@ -95,7 +95,7 @@ const handleEdit = () => {
       </Dropdown>
     </div>
 
-    <div class="sticky z-3 top-[48px] left-0 bg-$document px-[30px] py-[8px] grid grid-cols-[20px,1fr,30px,30px] gap-x-[8px] text-$typography-secondary">
+    <div class="sticky z-1 top-[48px] left-0 bg-$document my-[4px] px-[30px] py-[8px] grid grid-cols-[20px,1fr,30px,30px] gap-x-[8px] text-$typography-secondary">
       <p>
         lvl
       </p>
@@ -106,7 +106,7 @@ const handleEdit = () => {
       <p>dmg</p>
     </div>
 
-    <div class="px-[16px] mt-[4px]">
+    <div class="px-[16px]">
       <MunchkinCalculatorOfflineMunchkinList
         :munchkins="munchkins"
         :selected-munchkin="selectedMunchkin"
