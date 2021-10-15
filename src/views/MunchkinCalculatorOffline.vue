@@ -72,8 +72,8 @@ const handleEdit = () => {
 </script>
 
 <template>
-  <main class="px-[16px] py-[8px] flex flex-col space-y-[20px]">
-    <div class="flex space-x-[8px]">
+  <main class="py-[8px] flex flex-col">
+    <div class="px-[16px] flex space-x-[8px]">
       <MunchkinCalculatorOfflineNewMunchkinButton
         class="w-full"
         @handle-create="handleCreate()"
@@ -95,11 +95,24 @@ const handleEdit = () => {
       </Dropdown>
     </div>
 
-    <MunchkinCalculatorOfflineMunchkinList
-      :munchkins="munchkins"
-      :selected-munchkin="selectedMunchkin"
-      @handle-focus="handleFocus"
-    />
+    <div class="sticky z-3 top-[48px] left-0 bg-$document px-[30px] py-[8px] grid grid-cols-[20px,1fr,30px,30px] gap-x-[8px] text-$typography-secondary">
+      <p>
+        lvl
+      </p>
+      <p>munchkin</p>
+      <p>
+        gear
+      </p>
+      <p>dmg</p>
+    </div>
+
+    <div class="px-[16px] mt-[4px]">
+      <MunchkinCalculatorOfflineMunchkinList
+        :munchkins="munchkins"
+        :selected-munchkin="selectedMunchkin"
+        @handle-focus="handleFocus"
+      />
+    </div>
   </main>
 
   <transition
