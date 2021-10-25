@@ -85,5 +85,21 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
         this.commit()
       }
     },
+
+    clearMunchkins() {
+      this.munchkins = []
+      this.commit()
+    },
+
+    restartGame() {
+      this.munchkins = this.munchkins.map((e: any) => ({
+        ...e,
+        currentSex: e.originSex,
+        level: 1,
+        gear: 0,
+        class: null,
+        race: null,
+      }))
+    },
   },
 })

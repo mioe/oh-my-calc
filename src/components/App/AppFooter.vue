@@ -18,7 +18,7 @@ const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.va
     </router-link>
 
     <div class="flex-1 w-full flex justify-end items-center space-x-[8px]">
-      <WindowSizeButton />
+      <WindowSizeIndicator />
       <OnlineStatusButton />
       <LocaleButton />
       <DarkModeButton />

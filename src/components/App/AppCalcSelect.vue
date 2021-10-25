@@ -8,7 +8,7 @@ const route = useRoute()
 
 const routes = [
   { name: 'MunchkinCalculatorOffline', title: 'munchkinCalculatorOffline' },
-  { name: 'Testing', title: 'Testing' },
+  { name: 'Testing', title: 'testing' },
 ]
 
 const currentTitle: ComputedRef<string> = computed(() => {

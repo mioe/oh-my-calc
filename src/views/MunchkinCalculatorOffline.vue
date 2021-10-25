@@ -5,7 +5,7 @@ import { toast } from '@/use/useToast'
 import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
 const { t } = useI18n()
 const store = useMunchkinCalculatorOfflineStore()
-const { createMunchkin, removeMunchkin, editMunchkin } = store
+const { createMunchkin, removeMunchkin, editMunchkin, clearMunchkins, restartGame } = store
 const munchkins: ComputedRef<Array<any>> = computed(() => store.getMunchkins)
 
 const selectedMunchkin: Ref<any> = ref(null)
@@ -13,7 +13,6 @@ const handleFocus = (munchkin: any): void => {
   selectedMunchkin.value = munchkin
 }
 watchEffect(() => {
-  console.log('🦕 watchEffect')
   if (selectedMunchkin.value !== null) {
     editMunchkin(selectedMunchkin.value)
   }
@@ -69,6 +68,41 @@ const handleEdit = () => {
   form.value.originSex = selectedMunchkin.value.originSex
   isOpenModalMunchkin.value = true
 }
+
+
+const isOpenModalClear: Ref<boolean> = ref(false)
+const handleClear = () => {
+  console.log('🦕 handleClear')
+  isOpenModalClear.value = true
+}
+
+const handleClearMunchkins = (isAccepted = false) => {
+  if (isAccepted) {
+    selectedMunchkin.value = null
+    nextTick(() => {
+      clearMunchkins()
+      toast(t('success'), 'success')
+    })
+  }
+  isOpenModalClear.value = false
+}
+
+const isOpenModalRestartGame: Ref<boolean> = ref(false)
+const handleRestart = () => {
+  console.log('🦕 handleRestartGame')
+  isOpenModalRestartGame.value = true
+}
+
+const handleRestartGame = (isAccepted = false) => {
+  if (isAccepted) {
+    selectedMunchkin.value = null
+    nextTick(() => {
+      restartGame()
+      toast(t('success'), 'success')
+    })
+  }
+  isOpenModalRestartGame.value = false
+}
 </script>
 
 <template>
@@ -87,23 +121,48 @@ const handleEdit = () => {
             <icon-bi:three-dots-vertical />
           </button>
         </template>
-        <template #menu="scope">
-          <div>
-            {{ scope }}
-          </div>
+        <template #menu>
+          <button
+            class="inline-flex items-center p-[8px] rounded-[4px] w-full space-x-[8px] text-left"
+            @click="handleRestart"
+          >
+            <icon-carbon:rotate-360 />
+            <span>
+              New game
+            </span>
+          </button>
+          <button
+            class="inline-flex items-center p-[8px] rounded-[4px] w-full space-x-[8px] text-left"
+            @click="handleClear"
+          >
+            <icon-carbon:subtract-alt />
+            <span>
+              Clear data
+            </span>
+          </button>
+          <button class="inline-flex items-center p-[8px] rounded-[4px] w-full space-x-[8px] text-left">
+            <icon-carbon:3d-mpr-toggle />
+            <span>
+              Testing data
+            </span>
+          </button>
         </template>
       </Dropdown>
     </div>
 
-    <div class="sticky z-1 top-[48px] left-0 bg-$document my-[4px] px-[30px] py-[8px] grid grid-cols-[20px,1fr,30px,30px] gap-x-[8px] text-$typography-secondary">
-      <p>
-        lvl
+    <div class="sticky z-1 top-[48px] left-0 bg-$document my-[4px] pl-[27px] pr-[27px] py-[8px] grid grid-cols-[20px,1fr,30px,30px] gap-x-[8px] text-$typography-secondary">
+      <p class="text-center" :title="t('level')">
+        <icon-mi:ifrit />
       </p>
-      <p>munchkin</p>
-      <p>
-        gear
+      <p class="pt-[1.5px] pl-[5px]">
+        {{ t('munchkin') }}
       </p>
-      <p>dmg</p>
+      <p class="text-center" :title="t('gear')">
+        <icon-mi:robe />
+      </p>
+      <p class="text-center" :title="t('damage')">
+        <icon-mi:reaper-scythe />
+      </p>
     </div>
 
     <div class="px-[16px]">
@@ -132,39 +191,7 @@ const handleEdit = () => {
     />
   </transition>
 
-  <ModalDefault v-model="isOpenModalRemove">
-    <section class="w-full max-w-[320px] mx-auto px-[16px] py-[24px] rounded-[4px] bg-$document">
-      <header class="mb-[24px] space-y-[16px]">
-        <p class="leading-[1.25]">
-          {{ t('confirmRemoveMunchkin') }}?
-        </p>
-        <p class="truncate">
-          {{ t('name') }}: <span class="font-medium">{{ selectedMunchkin.name }}</span>
-        </p>
-      </header>
-      <div
-        class="space-y-[16px]"
-      >
-        <div class="flex items-center justify-end space-x-[8px]">
-          <button
-            class="button-default"
-            style="padding: 0 16px;"
-            @click="handleRemoveMunchkin()"
-          >
-            {{ t('cancel') }}
-          </button>
-          <button
-            class="button-default clear min-h-[32px] px-[16px] rounded-[4px] bg-$primary text-white"
-            @click="handleRemoveMunchkin(true)"
-          >
-            {{ t('remove') }}
-          </button>
-        </div>
-      </div>
-    </section>
-  </ModalDefault>
-
-  <ModalDefault v-model="isOpenModalMunchkin">
+  <Modal v-model="isOpenModalMunchkin">
     <section class="w-full max-w-[320px] mx-auto px-[16px] py-[24px] rounded-[4px] bg-$document">
       <header class="mb-[24px]">
         <h2>{{ isEditMunchkin ? t('editingAMunchkin') : t('addingANewMunchkin') }}:</h2>
@@ -204,5 +231,38 @@ const handleEdit = () => {
         </div>
       </form>
     </section>
-  </ModalDefault>
+  </Modal>
+
+  <ConfirmModal
+    v-model="isOpenModalRemove"
+    :text-cancel="t('cancel')"
+    :text-confirm="t('remove')"
+    @on-cancel="handleRemoveMunchkin()"
+    @on-confirm="handleRemoveMunchkin(true)"
+  >
+    <p class="leading-[1.25]">
+      {{ t('confirmRemoveMunchkin') }}?
+    </p>
+    <p class="truncate">
+      {{ t('name') }}: <span class="font-medium">{{ selectedMunchkin.name }}</span>
+    </p>
+  </ConfirmModal>
+
+  <ConfirmModal
+    v-model="isOpenModalClear"
+    text="Clear data?"
+    :text-cancel="t('cancel')"
+    :text-confirm="t('remove')"
+    @on-cancel="handleClearMunchkins()"
+    @on-confirm="handleClearMunchkins(true)"
+  />
+
+  <ConfirmModal
+    v-model="isOpenModalRestartGame"
+    text="Restart hame?"
+    :text-cancel="t('cancel')"
+    :text-confirm="t('remove')"
+    @on-cancel="handleRestartGame()"
+    @on-confirm="handleRestartGame(true)"
+  />
 </template>

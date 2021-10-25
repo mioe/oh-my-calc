@@ -30,5 +30,8 @@
   "halfling": "Halfling",
   "orc": "Orc",
   "human": "Human",
-  "gnome": "Gnome"
+  "gnome": "Gnome",
+  "testing": "UI Testing",
+  "munchkin": "Munchkin",
+  "damage": "Damage"
 }

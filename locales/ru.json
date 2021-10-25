@@ -30,5 +30,8 @@
   "halfling": "Хафлинг",
   "orc": "Орк",
   "human": "Человек",
-  "gnome": "Гном"
+  "gnome": "Гном",
+  "testing": "UI Testing",
+  "munchkin": "Манчкин",
+  "damage": "Урон"
 }

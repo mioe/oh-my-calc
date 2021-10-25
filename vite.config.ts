@@ -8,9 +8,11 @@ import IconsResolver from 'unplugin-icons/resolver'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { VitePWA } from 'vite-plugin-pwa'
+import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 
 // https://vitejs.dev/config/
+// @ts-ignore
 export default defineConfig(({ command, mode }) => {
   console.log('🦕 vite.config.ts/defineConfig', command, mode)
 
@@ -43,7 +45,17 @@ export default defineConfig(({ command, mode }) => {
       }),
 
       // https://github.com/antfu/unplugin-icons
-      Icons(),
+      Icons({
+        customCollections: {
+          // key as the collection name
+          // 'my-icons': {
+            // 'account': '<svg><!-- ... --></svg>',
+            // load your custom icon lazily
+            // 'burger': () => fs.readFile('./src/assets/icons/burger.svg', 'utf-8'),
+          // },
+          'mi': FileSystemIconLoader('./src/assets/icons'),
+        },
+      }),
 
       // https://github.com/antfu/vite-plugin-pwa
       VitePWA({
