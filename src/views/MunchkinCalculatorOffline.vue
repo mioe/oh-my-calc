@@ -184,7 +184,7 @@ const handleRestartGame = (isAccepted = false) => {
         @handle-focus="handleFocus"
       />
 
-      <div class="min-h-[190px] w-full py-[24px] text-$typography-secondary opacity-50">
+      <div class="min-h-[190px] w-full py-[24px] text-$typography-secondary opacity-25">
         <p class="mb-[10px]">
           {{ t('tooltip') }}:
         </p>
