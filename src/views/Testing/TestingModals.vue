@@ -4,7 +4,12 @@ import { ref, Ref } from 'vue'
 const modalProps: Ref<any> = ref({
   'v-model': false,
 })
-const isOpenConfirm: Ref<boolean> = ref(false)
+const confirmProps: Ref<any> = ref({
+  'v-model': false,
+  text: 'Lorem text',
+  'text-cancel': 'text-cancel',
+  'text-confirm': 'text-confirm',
+})
 </script>
 
 <template>
@@ -19,8 +24,13 @@ const isOpenConfirm: Ref<boolean> = ref(false)
         # Modal
       </h3>
 
+      <p>Slots:</p>
+      <ul class="ml-[16px] list-circle pl-[12px]">
+        <li>default</li>
+      </ul>
+
       <p>Props:</p>
-      <table>
+      <table class="ml-[16px]">
         <tr
           v-for="(value, key) in modalProps"
           :key="key"
@@ -44,6 +54,44 @@ const isOpenConfirm: Ref<boolean> = ref(false)
           </p>
         </div>
       </Modal>
+    </div>
+
+    <div class="space-y-[8px]">
+      <h3 class="text-$primary">
+        # Confirm
+      </h3>
+
+      <p>Slots:</p>
+      <ul class="ml-[16px] list-circle pl-[12px]">
+        <li>default (replace text prop)</li>
+      </ul>
+
+      <p>Props:</p>
+      <table class="ml-[16px]">
+        <tr
+          v-for="(value, key) in confirmProps"
+          :key="key"
+        >
+          <td>{{ key }}</td>
+          <td><span class="opacity-50">{{ `${value}` }}</span></td>
+        </tr>
+      </table>
+
+      <button
+        class="button-default"
+        @click="confirmProps['v-model'] = !confirmProps['v-model']"
+      >
+        Toggle confirm
+      </button>
+
+      <Confirm
+        v-model="confirmProps['v-model']"
+        text="Lorem text"
+        text-cancel="text-cancel"
+        text-confirm="text-confirm"
+        @on-cancel="confirmProps['v-model'] = false"
+        @on-confirm="confirmProps['v-model'] = false"
+      />
     </div>
   </section>
 </template>

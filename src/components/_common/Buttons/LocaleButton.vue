@@ -8,6 +8,7 @@ const toggleLocales = (): void => {
   const locales = availableLocales
   locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
   localStorage.setItem('i18n', locale.value)
+  document.documentElement.lang = locale.value
 }
 </script>
 

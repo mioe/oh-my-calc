@@ -222,7 +222,7 @@ const handleRestartGame = (isAccepted = false) => {
           </div>
           <div>
             <button
-              class="clear min-h-[37px] px-[16px] rounded-[4px] bg-$primary text-white"
+              class="min-h-[37px] px-[16px] rounded-[4px] bg-$primary text-white"
               type="submit"
             >
               {{ isEditMunchkin ? t('edit') : t('add') }}

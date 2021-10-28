@@ -16,10 +16,8 @@ const testingRoutes: ComputedRef<RouteRecordRaw[] | undefined> = computed(() => 
         v-for="route in testingRoutes"
         :key="route.name"
         :to="{ name: route.name }"
-        class="button-default mr-[8px] mb-[8px]"
-        :style="{
-          backgroundColor: `${currentRoute.name === route.name ? 'var(--primary)' : ''}`
-        }"
+        class="mr-[8px] mb-[8px]"
+        :class="currentRoute.name === route.name ? 'button-primary' : 'button-default'"
       >
         {{ route.path }}
       </router-link>

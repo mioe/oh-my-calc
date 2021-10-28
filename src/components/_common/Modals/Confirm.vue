@@ -44,7 +44,8 @@ defineProps({
             {{ textCancel }}
           </button>
           <button
-            class="button-default clear min-h-[32px] px-[16px] rounded-[4px] bg-$primary text-white"
+            class="button-primary"
+            style="padding: 0 16px;"
             @click="emit('on-confirm')"
           >
             {{ textConfirm }}

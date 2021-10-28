@@ -35,7 +35,7 @@ const materialTextareaProps: Ref<any> = ref({
       </h3>
 
       <p>Props:</p>
-      <table>
+      <table class="ml-[16px]">
         <tr
           v-for="(value, key) in materialInputProps"
           :key="key"
@@ -62,7 +62,7 @@ const materialTextareaProps: Ref<any> = ref({
       </h3>
 
       <p>Props:</p>
-      <table>
+      <table class="ml-[16px]">
         <tr
           v-for="(value, key) in materialTextareaProps"
           :key="key"

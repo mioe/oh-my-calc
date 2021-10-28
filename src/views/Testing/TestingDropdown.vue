@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue'
 
-const positionX: Ref<string> = ref('left')
-const positionY: Ref<string> = ref('bottom')
-const keepOnContentClick: Ref<boolean> = ref(false)
-const disabled: Ref<boolean> = ref(false)
+const dropdownProps: Ref<any> = ref({
+  'position-x': 'left',
+  'position-y': 'bottom',
+  'keep-on-content-click': false,
+  disabled: false,
+})
 </script>
 
 <template>
@@ -13,48 +15,55 @@ const disabled: Ref<boolean> = ref(false)
       <h2 class="text-$primary">
         # Dropdown
       </h2>
+
+      <p>Slots:</p>
+      <ul class="ml-[16px] list-circle pl-[12px]">
+        <li>header (scope method toggle)</li>
+        <li>menu</li>
+      </ul>
+
       <h3>
         Props:
       </h3>
-      <div>
-        <span>positionX: </span>
+      <div class="ml-[16px]">
+        <span>position-x: </span>
         <label
           v-for="pos in ['left', 'right']"
           :key="pos"
         >
-          <input v-model="positionX" type="radio" :value="pos">
+          <input v-model="dropdownProps['position-x']" type="radio" :value="pos">
           <span>{{ pos }}</span>
         </label>
       </div>
-      <div>
-        <span>positionY: </span>
+      <div class="ml-[16px]">
+        <span>position-y: </span>
         <label
           v-for="pos in ['bottom', 'top']"
           :key="pos"
         >
-          <input v-model="positionY" type="radio" :value="pos">
+          <input v-model="dropdownProps['position-y']" type="radio" :value="pos">
           <span>{{ pos }}</span>
         </label>
       </div>
-      <div>
-        <span>keepOnContentClick: </span>
+      <div class="ml-[16px]">
+        <span>keep-on-content-click: </span>
         <label>
-          <input v-model="keepOnContentClick" type="checkbox">
+          <input v-model="dropdownProps['keep-on-content-click']" type="checkbox">
         </label>
       </div>
-      <div>
+      <div class="ml-[16px]">
         <span>disabled: </span>
         <label>
-          <input v-model="disabled" type="checkbox">
+          <input v-model="dropdownProps.disabled" type="checkbox">
         </label>
       </div>
     </div>
     <div class="flex justify-center">
       <Dropdown
-        :position-x="positionX"
-        :position-y="positionY"
-        :keep-on-content-click="keepOnContentClick"
-        :disabled="disabled"
+        :position-x="dropdownProps['position-x']"
+        :position-y="dropdownProps['position-y']"
+        :keep-on-content-click="dropdownProps['keep-on-content-click']"
+        :disabled="dropdownProps.disabled"
       >
         <template #header="scope">
           <button
@@ -68,7 +77,7 @@ const disabled: Ref<boolean> = ref(false)
         <template #menu="scope">
           <p class="whitespace-nowrap">
             <span class="text-$primary">propPositions: </span>
-            {{ positionX }} {{ positionY }}
+            {{ dropdownProps['position-x'] }} {{ dropdownProps['position-y'] }}
           </p>
           <p class="whitespace-nowrap">
             <span class="text-$primary">transformOrigin: </span>

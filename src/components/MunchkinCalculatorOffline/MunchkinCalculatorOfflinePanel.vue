@@ -101,11 +101,7 @@ const onChangeSelect = (event: any, hook: 'class' | 'race') => {
           </span>
         </button>
         <button
-          class="button-default"
-          :style="{
-            backgroundColor: isSpecialTabOpen ? 'var(--primary)' : undefined,
-            color: isSpecialTabOpen ? 'white' : undefined,
-          }"
+          :class="isSpecialTabOpen ? 'button-primary' : 'button-default'"
           @click="isSpecialTabOpen = !isSpecialTabOpen"
         >
           <icon-carbon:accessibility-alt />
@@ -161,21 +157,13 @@ const onChangeSelect = (event: any, hook: 'class' | 'race') => {
             {{ t('sex') }}:
           </p>
           <button
-            class="button-default"
-            :style="{
-              backgroundColor: `var(${modelValue.currentSex === true
-                ? '--primary' : '--secondary'})`,
-            }"
+            :class="modelValue.currentSex === true ? 'button-primary' : 'button-default'"
             @click="handleSex(true)"
           >
             <icon-twemoji:male-sign class="w-[20px] h-[20px]" />
           </button>
           <button
-            class="button-default"
-            :style="{
-              backgroundColor: `var(${modelValue.currentSex === false
-                ? '--primary' : '--secondary'})`,
-            }"
+            :class="modelValue.currentSex === false ? 'button-primary' : 'button-default'"
             @click="handleSex(false)"
           >
             <icon-twemoji:female-sign class="w-[20px] h-[20px]" />
