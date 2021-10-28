@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ComputedRef, defineProps, ref, Ref } from 'vue'
+import { computed, ComputedRef, ref, Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useWindowSize } from '@vueuse/core'
 const { t } = useI18n()

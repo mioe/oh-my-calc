@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Home from '@/views/Home.vue'
 
+/* Routes group */
+import TestingRoutes from './_testing-routes'
+
 const routes = [
   {
     path: '/',
@@ -12,18 +15,7 @@ const routes = [
     name: 'MunchkinCalculatorOffline',
     component: () => import('@/views/MunchkinCalculatorOffline.vue'),
   },
-  {
-    path: '/testing',
-    name: 'Testing',
-    component: () => import('@/views/Testing.vue'),
-    children: [
-      {
-        path: 'dropdown',
-        name: 'TestingDropdown',
-        component: () => import('@/views/Testing/TestingDropdown.vue'),
-      },
-    ],
-  },
+  ...TestingRoutes,
   {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/Error404.vue'),

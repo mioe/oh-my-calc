@@ -200,7 +200,7 @@ const handleRestartGame = (isAccepted = false) => {
         class="space-y-[16px]"
         @submit.prevent="handleSubmit()"
       >
-        <FormMaterialInput
+        <MaterialInput
           v-model="form.name"
           :placeholder="t('name')"
           required
