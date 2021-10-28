@@ -233,7 +233,7 @@ const handleRestartGame = (isAccepted = false) => {
     </section>
   </Modal>
 
-  <ConfirmModal
+  <Confirm
     v-model="isOpenModalRemove"
     :text-cancel="t('cancel')"
     :text-confirm="t('remove')"
@@ -246,9 +246,9 @@ const handleRestartGame = (isAccepted = false) => {
     <p class="truncate">
       {{ t('name') }}: <span class="font-medium">{{ selectedMunchkin.name }}</span>
     </p>
-  </ConfirmModal>
+  </Confirm>
 
-  <ConfirmModal
+  <Confirm
     v-model="isOpenModalClear"
     text="Clear data?"
     :text-cancel="t('cancel')"
@@ -257,7 +257,7 @@ const handleRestartGame = (isAccepted = false) => {
     @on-confirm="handleClearMunchkins(true)"
   />
 
-  <ConfirmModal
+  <Confirm
     v-model="isOpenModalRestartGame"
     text="Restart hame?"
     :text-cancel="t('cancel')"

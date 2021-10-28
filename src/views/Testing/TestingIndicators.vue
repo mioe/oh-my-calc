@@ -5,5 +5,12 @@
         # Indicators
       </h2>
     </div>
+    <div class="space-y-[8px]">
+      <h3 class="text-$primary">
+        # WindowSizeIndicator
+      </h3>
+
+      <WindowSizeIndicator />
+    </div>
   </section>
 </template>

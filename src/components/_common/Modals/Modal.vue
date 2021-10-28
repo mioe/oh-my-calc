@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, computed, ComputedRef } from 'vue'
+import { watch, computed, ComputedRef, onBeforeUnmount } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -24,6 +24,10 @@ watch(isShow, (val) => {
     document.body.classList.remove('is-blocked')
   }
 })
+
+onBeforeUnmount(() => {
+  document.body.classList.remove('is-blocked')
+})
 </script>
 
 <template>
@@ -36,13 +40,15 @@ watch(isShow, (val) => {
       leave-from-class="transform opacity-100 scale-100"
       leave-to-class="transform opacity-0 scale-95"
     >
-      <section v-if="modelValue" class="fixed z-11 top-0 left-0 w-full h-full flex flex-col justify-center px-[16px] bg-[rgba(0,0,0,.9)]">
+      <section v-if="modelValue" class="fixed z-11 top-0 left-0 w-full h-full flex flex-col justify-center bg-[rgba(0,0,0,.9)]">
         <button class="button-default absolute top-[14px] right-[14px] w-[32px] h-[32px] p-0 grid place-items-center text-[18px]" @click="onToggleModal(false)">
           <icon-carbon:close />
         </button>
-        <div class="h-[60px]" />
-        <slot />
-        <div class="h-[60px]" />
+        <div class="relative max-h-screen overflow-auto px-[16px]">
+          <div class="h-[60px]" />
+          <slot />
+          <div class="h-[60px]" />
+        </div>
       </section>
     </transition>
   </teleport>

@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue'
 
-const text: Ref<string> = ref('')
-
 const materialInputProps: Ref<any> = ref({
   id: 'testInput',
+  'v-model': '',
   type: 'text',
   placeholder: 'MaterialInput',
   autocomplete: 'off',
@@ -15,6 +14,7 @@ const materialInputProps: Ref<any> = ref({
 
 const materialTextareaProps: Ref<any> = ref({
   id: 'testTextarea',
+  'v-model': '',
   placeholder: 'MaterialTextarea',
   autocomplete: 'off',
   disabled: false,
@@ -34,6 +34,7 @@ const materialTextareaProps: Ref<any> = ref({
         # MaterialInput
       </h3>
 
+      <p>Props:</p>
       <table>
         <tr
           v-for="(value, key) in materialInputProps"
@@ -46,7 +47,7 @@ const materialTextareaProps: Ref<any> = ref({
 
       <MaterialInput
         :id="materialInputProps.id"
-        v-model="text"
+        v-model="materialInputProps['v-model']"
         :type="materialInputProps.type"
         :placeholder="materialInputProps.placeholder"
         :autocomplete="materialInputProps.autocomplete"
@@ -60,6 +61,7 @@ const materialTextareaProps: Ref<any> = ref({
         # MaterialTextarea
       </h3>
 
+      <p>Props:</p>
       <table>
         <tr
           v-for="(value, key) in materialTextareaProps"
@@ -70,7 +72,14 @@ const materialTextareaProps: Ref<any> = ref({
         </tr>
       </table>
 
-      <MaterialTextarea v-model="text" placeholder="MaterialTextarea" />
+      <MaterialTextarea
+        :id="materialTextareaProps.id"
+        v-model="materialTextareaProps['v-model']"
+        :placeholder="materialTextareaProps.placeholder"
+        :autocomplete="materialTextareaProps.autocomplete"
+        :disabled="materialTextareaProps.disabled"
+        :required="materialTextareaProps.required"
+      />
     </div>
   </section>
 </template>

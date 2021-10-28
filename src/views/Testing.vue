@@ -21,7 +21,7 @@ const testingRoutes: ComputedRef<RouteRecordRaw[] | undefined> = computed(() => 
           backgroundColor: `${currentRoute.name === route.name ? 'var(--primary)' : ''}`
         }"
       >
-        {{ route.name }}
+        {{ route.path }}
       </router-link>
     </section>
 
