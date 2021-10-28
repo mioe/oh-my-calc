@@ -33,5 +33,8 @@
   "gnome": "Гном",
   "testing": "UI Testing",
   "munchkin": "Манчкин",
-  "damage": "Урон"
+  "damage": "Урон",
+  "withoutClass": "Без класса",
+  "pressTheButton": "Нажми на кнопку",
+  "tooltip": "Подсказка"
 }

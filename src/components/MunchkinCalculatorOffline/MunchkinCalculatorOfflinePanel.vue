@@ -183,7 +183,7 @@ const onChangeSelect = (event: any, hook: 'class' | 'race') => {
               :value="modelValue.class"
               @change="onChangeSelect($event, 'class')"
             >
-              <option value="">Нет класса</option>
+              <option value="">{{ t('withoutClass') }}</option>
               <option
                 v-for="cls in munchkinClasses"
                 :key="cls"
@@ -206,7 +206,6 @@ const onChangeSelect = (event: any, hook: 'class' | 'race') => {
               :value="modelValue.race"
               @change="onChangeSelect($event, 'race')"
             >
-              <option value="">Нет рассы</option>
               <option
                 v-for="race in munchkinRaces"
                 :key="race"

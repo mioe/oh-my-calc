@@ -47,7 +47,7 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
         level: 1,
         gear: 0,
         class: null,
-        race: null,
+        race: 'human',
       }
       this.munchkins.push(newMunchkin)
       this.commit()
@@ -79,8 +79,8 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
         find.originSex = originSex || find.originSex
         find.currentSex = typeof currentSex === 'boolean' ? currentSex : find.currentSex
         find.level = level || find.level
-        find.gear = gear || find.gear
-        find.class = munchkinClass || find.class
+        find.gear = gear ?? find.gear
+        find.class = munchkinClass ?? find.class
         find.race = race || find.race
         this.commit()
       }
@@ -98,7 +98,7 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
         level: 1,
         gear: 0,
         class: null,
-        race: null,
+        race: 'human',
       }))
     },
   },

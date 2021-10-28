@@ -5,6 +5,11 @@ const routes = [
     component: () => import('@/views/Testing.vue'),
     children: [
       {
+        path: 'anime',
+        name: 'TestingAnime',
+        component: () => import('@/views/Testing/TestingAnime.vue'),
+      },
+      {
         path: 'buttons',
         name: 'TestingButtons',
         component: () => import('@/views/Testing/TestingButtons.vue'),

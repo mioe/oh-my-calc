@@ -150,7 +150,10 @@ const handleRestartGame = (isAccepted = false) => {
       </Dropdown>
     </div>
 
-    <div class="sticky z-1 top-[48px] left-0 bg-$document my-[4px] pl-[27px] pr-[27px] py-[8px] grid grid-cols-[20px,1fr,30px,30px] gap-x-[8px] text-$typography-secondary">
+    <div
+      v-if="munchkins.length > 0"
+      class="sticky z-1 top-[48px] left-0 bg-$document my-[4px] pl-[27px] pr-[27px] py-[8px] grid grid-cols-[20px,1fr,30px,30px] gap-x-[8px] text-$typography-secondary"
+    >
       <p class="text-center" :title="t('level')">
         <icon-mi:ifrit />
       </p>
@@ -165,12 +168,38 @@ const handleRestartGame = (isAccepted = false) => {
       </p>
     </div>
 
+    <div v-else class="px-[16px] flex space-x-[8px] mt-[4px]">
+      <div class="flex-1 w-full flex justify-center opacity-50 text-$typography-secondary">
+        <PressTopElement>
+          {{ t('pressTheButton') }}
+        </PressTopElement>
+      </div>
+      <div class="w-[32px]" />
+    </div>
+
     <div class="px-[16px]">
       <MunchkinCalculatorOfflineMunchkinList
         :munchkins="munchkins"
         :selected-munchkin="selectedMunchkin"
         @handle-focus="handleFocus"
       />
+
+      <div class="min-h-[190px] w-full py-[24px] text-$typography-secondary opacity-50">
+        <p class="mb-[10px]">
+          {{ t('tooltip') }}:
+        </p>
+        <ul class="space-y-[8px]">
+          <li>
+            <icon-mi:ifrit /> - {{ t('level') }} [1..10]
+          </li>
+          <li>
+            <icon-mi:robe /> - {{ t('gear') }} [0..99]
+          </li>
+          <li>
+            <icon-mi:reaper-scythe /> - {{ t('damage') }} [<icon-mi:ifrit /> + <icon-mi:robe />]
+          </li>
+        </ul>
+      </div>
     </div>
   </main>
 

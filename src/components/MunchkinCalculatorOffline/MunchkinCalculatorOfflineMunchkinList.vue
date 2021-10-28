@@ -30,6 +30,5 @@ const handleFocus = (munchkin: any):void => {
       :is-focus="selectedMunchkin && (selectedMunchkin.uid === m.uid)"
       @handle-focus="handleFocus"
     />
-    <div class="h-[190px] w-full" />
   </section>
 </template>
