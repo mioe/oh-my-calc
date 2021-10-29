@@ -36,5 +36,10 @@
   "damage": "Урон",
   "withoutClass": "Без класса",
   "pressTheButton": "Нажми на кнопку",
-  "tooltip": "Подсказка"
+  "tooltip": "Подсказка",
+  "restartGameMunchkinTitle": "Вы хотите начать новую игру",
+  "restartGameMunchkinDescription": "Все манчкины вернутся к первоначальному виду",
+  "newGame": "Новая игра",
+  "removeAll": "Удалить все",
+  "removeAllGameMunchkins": "Удалить всех манчикинов"
 }

@@ -6,6 +6,8 @@ button
   @apply z-1
   &:focus
     box-shadow: 0 0 0 .2rem var(--primary)
+  &:disabled
+    @apply opacity-25
 
 .button-default:not(.clear),
 .button-primary:not(.clear)

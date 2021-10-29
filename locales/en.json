@@ -36,5 +36,10 @@
   "damage": "Damage",
   "withoutClass": "Without class",
   "pressTheButton": "Press the button",
-  "tooltip": "Tooltip"
+  "tooltip": "Tooltip",
+  "restartGameMunchkinTitle": "You want to start a new game",
+  "restartGameMunchkinDescription": "All munchkins will return to the original form",
+  "newGame": "New game",
+  "removeAll": "Remove all",
+  "removeAllGameMunchkins": "Remove all munchkins"
 }

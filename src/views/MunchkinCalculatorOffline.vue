@@ -123,27 +123,23 @@ const handleRestartGame = (isAccepted = false) => {
         </template>
         <template #menu>
           <button
+            :disabled="munchkins.length === 0"
             class="inline-flex items-center p-[8px] rounded-[4px] w-full space-x-[8px] text-left"
             @click="handleRestart"
           >
             <icon-carbon:rotate-360 />
             <span>
-              New game
+              {{ t('newGame') }}
             </span>
           </button>
           <button
+            :disabled="munchkins.length === 0"
             class="inline-flex items-center p-[8px] rounded-[4px] w-full space-x-[8px] text-left"
             @click="handleClear"
           >
-            <icon-carbon:subtract-alt />
+            <icon-carbon:delete />
             <span>
-              Clear data
-            </span>
-          </button>
-          <button class="inline-flex items-center p-[8px] rounded-[4px] w-full space-x-[8px] text-left">
-            <icon-carbon:3d-mpr-toggle />
-            <span>
-              Testing data
+              {{ t('removeAll') }}
             </span>
           </button>
         </template>
@@ -184,7 +180,10 @@ const handleRestartGame = (isAccepted = false) => {
         @handle-focus="handleFocus"
       />
 
-      <div class="min-h-[190px] w-full py-[24px] text-$typography-secondary opacity-25">
+      <div
+        v-if="munchkins.length > 0"
+        class="min-h-[190px] w-full py-[32px] text-$typography-secondary opacity-25"
+      >
         <p class="mb-[10px]">
           {{ t('tooltip') }}:
         </p>
@@ -278,20 +277,28 @@ const handleRestartGame = (isAccepted = false) => {
   </Confirm>
 
   <Confirm
-    v-model="isOpenModalClear"
-    text="Clear data?"
-    :text-cancel="t('cancel')"
-    :text-confirm="t('remove')"
-    @on-cancel="handleClearMunchkins()"
-    @on-confirm="handleClearMunchkins(true)"
-  />
-
-  <Confirm
     v-model="isOpenModalRestartGame"
-    text="Restart hame?"
     :text-cancel="t('cancel')"
-    :text-confirm="t('remove')"
+    :text-confirm="t('newGame')"
     @on-cancel="handleRestartGame()"
     @on-confirm="handleRestartGame(true)"
+  >
+    <div class="space-y-[16px]">
+      <p>
+        {{ t('restartGameMunchkinTitle') }}?
+      </p>
+      <p class="text-$typography-secondary">
+        {{ t('restartGameMunchkinDescription') }}
+      </p>
+    </div>
+  </Confirm>
+
+  <Confirm
+    v-model="isOpenModalClear"
+    :text="`${t('removeAllGameMunchkins')}?`"
+    :text-cancel="t('cancel')"
+    :text-confirm="t('removeAll')"
+    @on-cancel="handleClearMunchkins()"
+    @on-confirm="handleClearMunchkins(true)"
   />
 </template>
