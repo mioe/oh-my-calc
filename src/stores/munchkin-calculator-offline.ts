@@ -76,8 +76,8 @@ export const useMunchkinCalculatorOfflineStore = defineStore('munchkin-calculato
       const find = this.munchkins.find((m: any) => m.uid === uid)
       if (find) {
         find.name = name || find.name
-        find.originSex = originSex || find.originSex
-        find.currentSex = typeof currentSex === 'boolean' ? currentSex : find.currentSex
+        find.originSex = originSex ?? find.originSex
+        find.currentSex =  currentSex ?? find.currentSex
         find.level = level || find.level
         find.gear = gear ?? find.gear
         find.class = munchkinClass ?? find.class
