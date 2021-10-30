@@ -41,5 +41,7 @@
   "restartGameMunchkinDescription": "All munchkins will return to the original form",
   "newGame": "New game",
   "removeAll": "Remove all",
-  "removeAllGameMunchkins": "Remove all munchkins"
+  "removeAllGameMunchkins": "Remove all munchkins",
+  "signIn": "Sign in",
+  "signOut": "Sign out"
 }

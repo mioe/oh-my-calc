@@ -10,9 +10,9 @@ const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.va
     <AppCalcSelect class="flex-1" />
     <template v-if="isPortrait">
       <WindowSizeIndicator />
-      <CloudButton />
       <LocaleButton />
       <DarkModeButton />
+      <CloudButton />
     </template>
   </header>
 </template>

@@ -41,5 +41,7 @@
   "restartGameMunchkinDescription": "Все манчкины вернутся к первоначальному виду",
   "newGame": "Новая игра",
   "removeAll": "Удалить все",
-  "removeAllGameMunchkins": "Удалить всех манчикинов"
+  "removeAllGameMunchkins": "Удалить всех манчикинов",
+  "signIn": "Войти",
+  "signOut": "Выйти"
 }

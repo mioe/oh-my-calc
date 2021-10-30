@@ -29,11 +29,15 @@ export const useAuthStore = defineStore('auth-store', {
           console.error('🦕', errorCode, errorMessage)
         })
     },
-    onSignOut(): void {
-      signOut(this.auth).then(() => {
-        // Sign-out successful.
-      }).catch((error) => {
-        // An error happened.
+    onSignOut(): Promise<any> {
+      return new Promise((resolve, reject) => {
+        signOut(this.auth).then((result) => {
+          // Sign-out successful.
+          resolve(result)
+        }).catch((err) => {
+          // An error happened.
+          reject(err)
+        })
       })
     },
   },

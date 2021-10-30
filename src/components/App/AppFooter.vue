@@ -19,9 +19,9 @@ const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.va
 
     <div class="flex-1 w-full flex justify-end items-center space-x-[8px]">
       <WindowSizeIndicator />
-      <CloudButton />
       <LocaleButton />
       <DarkModeButton />
+      <CloudButton />
     </div>
   </footer>
 </template>
