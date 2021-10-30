@@ -1,6 +1,5 @@
 /**
- * Firebase App (the core Firebase SDK) is always required and
- * must be listed before other Firebase SDKs
+ * Import the functions you need from the SDKs you need
  */
 import { initializeApp } from 'firebase/app'
 

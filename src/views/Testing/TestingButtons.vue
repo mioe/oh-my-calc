@@ -58,10 +58,10 @@ const btnClasses: Ref<any> = ref([
 
     <div class="space-y-[8px]">
       <h3 class="text-$primary">
-        # OnlineStatusButton
+        # CloudButton
       </h3>
 
-      <OnlineStatusButton />
+      <CloudButton />
     </div>
   </section>
 </template>

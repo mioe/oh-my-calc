@@ -12,5 +12,12 @@
 
       <WindowSizeIndicator />
     </div>
+    <div class="space-y-[8px]">
+      <h3 class="text-$primary">
+        # OnlineStatusIndicator
+      </h3>
+
+      <OnlineStatusIndicator />
+    </div>
   </section>
 </template>
