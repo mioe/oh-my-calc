@@ -13,7 +13,7 @@ const routes = [
 
 const currentTitle: ComputedRef<string> = computed(() => {
   const cuurentRoute = routes.find(e => e.name === route.name)
-  return cuurentRoute?.title || route.path
+  return cuurentRoute?.title ? t(cuurentRoute.title) : route.path
 })
 </script>
 
@@ -34,7 +34,7 @@ const currentTitle: ComputedRef<string> = computed(() => {
             OhMy<span class="text-$primary">Calc</span>
           </template>
           <template v-else>
-            {{ t(currentTitle) }}
+            {{ currentTitle }}
           </template>
         </span>
       </button>

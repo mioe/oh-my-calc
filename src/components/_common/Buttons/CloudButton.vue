@@ -23,10 +23,12 @@ const handleSignOut = async() => {
 </script>
 
 <template>
-  <Dropdown>
+  <Dropdown
+    position-y="top"
+  >
     <template #header="scope">
       <button
-        class="button-default"
+        class="inline-flex min-w-[32px] min-h-[32px] justify-center items-center text-center rounded-[4px] overflow-hidden bg-$secondary"
         @click="scope.toggle"
       >
         <icon-carbon:cloud-upload />

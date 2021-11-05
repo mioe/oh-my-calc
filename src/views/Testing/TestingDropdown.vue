@@ -98,10 +98,10 @@ const dropdownProps: Ref<any> = ref({
         <Dropdown
           v-for="i in 3"
           :key="`${i}`"
-          :position-x="positionX"
-          :position-y="positionY"
-          :keep-on-content-click="keepOnContentClick"
-          :disabled="disabled"
+          :position-x="dropdownProps['position-x']"
+          :position-y="dropdownProps['position-y']"
+          :keep-on-content-click="dropdownProps['keep-on-content-click']"
+          :disabled="dropdownProps.disabled"
         >
           <template #header="scope">
             <button
@@ -114,7 +114,7 @@ const dropdownProps: Ref<any> = ref({
           <template #menu="scope">
             <p class="whitespace-nowrap">
               <span class="text-$primary">propPositions: </span>
-              {{ positionX }} {{ positionY }}
+              {{ dropdownProps['position-x'] }} {{ dropdownProps['position-y'] }}
             </p>
             <p class="whitespace-nowrap">
               <span class="text-$primary">transformOrigin: </span>

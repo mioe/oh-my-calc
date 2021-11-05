@@ -126,6 +126,12 @@ const stateClasses: ComputedRef<any> = computed(() => {
     'is-disabled': props.disabled,
   }
 })
+
+const flipYPositionForTransform: ComputedRef<string> = computed(() =>
+  localPositionY.value === 'bottom'
+    ? 'top'
+    : 'bottom',
+)
 </script>
 
 <template>
@@ -152,7 +158,7 @@ const stateClasses: ComputedRef<any> = computed(() => {
         role="menu"
         class="mi-dropdown--menu absolute z-2 min-w-[160px] rounded-[4px] bg-$secondary overflow-x-hidden overflow-y-auto"
         :style="{
-          transformOrigin: `${localPositionX} ${localPositionY}`,
+          transformOrigin: `${localPositionX} ${flipYPositionForTransform}`,
           boxShadow: '0 22px 70px 4px rgba(0, 0, 0, 0.56)',
           ...menuStyles,
         }"

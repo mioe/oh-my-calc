@@ -10,18 +10,20 @@ import {
   signOut,
 } from 'firebase/auth'
 
+const auth = getAuth()
+
 export const useAuthStore = defineStore('auth-store', {
   state: (): any => ({
-    auth: getAuth(),
+    hello: 'world',
   }),
   getters: {
   },
   actions: {
     onSignIn(): void {
-      setPersistence(this.auth, inMemoryPersistence)
+      setPersistence(auth, inMemoryPersistence)
         .then(() => {
           const provider = new GoogleAuthProvider()
-          return signInWithRedirect(this.auth, provider)
+          return signInWithRedirect(auth, provider)
         })
         .catch((error) => {
           const errorCode = error.code
@@ -31,7 +33,7 @@ export const useAuthStore = defineStore('auth-store', {
     },
     onSignOut(): Promise<any> {
       return new Promise((resolve, reject) => {
-        signOut(this.auth).then((result) => {
+        signOut(auth).then((result) => {
           // Sign-out successful.
           resolve(result)
         }).catch((err) => {
