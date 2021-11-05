@@ -21,7 +21,6 @@ const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.va
       <WindowSizeIndicator />
       <LocaleButton />
       <DarkModeButton />
-      <CloudButton />
     </div>
   </footer>
 </template>

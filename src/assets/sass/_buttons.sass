@@ -9,6 +9,10 @@ button
   &:disabled
     @apply opacity-25
 
+a[class*=button-]
+  &:focus
+    box-shadow: 0 0 0 .2rem var(--primary)
+
 .button-default:not(.clear),
 .button-primary:not(.clear)
   @apply inline-flex min-w-[32px] min-h-[32px] p-[6px] justify-center items-center text-center rounded-[4px]

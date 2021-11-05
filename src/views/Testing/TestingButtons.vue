@@ -55,13 +55,5 @@ const btnClasses: Ref<any> = ref([
 
       <LocaleButton />
     </div>
-
-    <div class="space-y-[8px]">
-      <h3 class="text-$primary">
-        # CloudButton
-      </h3>
-
-      <CloudButton />
-    </div>
   </section>
 </template>

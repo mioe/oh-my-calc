@@ -5,6 +5,7 @@ import { useWindowSize } from '@vueuse/core'
 const { t } = useI18n()
 const { width, height } = useWindowSize()
 const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.value)
+const isTableVer: ComputedRef<boolean> = computed(() => width.value >= 768)
 import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
 const store = useMunchkinCalculatorOfflineStore()
 const { munchkinRaces, munchkinClasses } = store
@@ -101,6 +102,7 @@ const onChangeSelect = (event: any, hook: 'class' | 'race') => {
           </span>
         </button>
         <button
+          v-if="!isTableVer"
           :class="isSpecialTabOpen ? 'button-primary' : 'button-default'"
           @click="isSpecialTabOpen = !isSpecialTabOpen"
         >
@@ -120,138 +122,140 @@ const onChangeSelect = (event: any, hook: 'class' | 'race') => {
         </button>
       </div>
     </div>
-    <div v-if="!isSpecialTabOpen" class="max-w-[1200px] h-[118px] px-[16px] mx-auto flex items-start space-x-[16px] justify-between">
-      <div class="inline-flex flex-col items-center space-y-[8px]">
-        <button
-          class="button-default w-full"
-          @click="handleIncrement('level')"
-        >
-          +
-        </button>
-        <label class="relative flex flex-col max-w-[60px]">
-          <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
-            {{ t('level') }}
-          </span>
-          <input
-            ref="levelHook"
-            type="number"
-            min="1"
-            max="10"
-            step="1"
-            :value="modelValue.level"
-            class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
-            @change="onChangeCounter($event, 'level')"
-          >
-        </label>
-        <button
-          class="button-default w-full"
-          @click="handleDecrement('level')"
-        >
-          -
-        </button>
-      </div>
-
-      <div class="flex-1 w-full flex flex-col space-y-[8px]">
-        <div class="w-full flex items-center space-x-[8px]">
-          <p class="text-$typography-secondary">
-            {{ t('sex') }}:
-          </p>
+    <div class="grid md:grid-cols-2 gap-x-[16px] max-w-[1200px] mx-auto">
+      <div v-if="!isSpecialTabOpen || isTableVer" class="w-full  h-[118px] px-[16px] mx-auto flex items-start space-x-[16px] justify-between">
+        <div class="inline-flex flex-col items-center space-y-[8px]">
           <button
-            :class="modelValue.currentSex === true ? 'button-primary' : 'button-default'"
-            @click="handleSex(true)"
+            class="button-default w-full"
+            @click="handleIncrement('level')"
           >
-            <icon-twemoji:male-sign class="w-[20px] h-[20px]" />
+            +
           </button>
-          <button
-            :class="modelValue.currentSex === false ? 'button-primary' : 'button-default'"
-            @click="handleSex(false)"
-          >
-            <icon-twemoji:female-sign class="w-[20px] h-[20px]" />
-          </button>
-          <p class="text-$typography-secondary opacity-25 lowercase">
-            ({{ modelValue.currentSex ? t('male') : t('female') }})
-          </p>
-        </div>
-        <div class="w-full">
-          <label class="relative flex flex-col">
+          <label class="relative flex flex-col max-w-[60px]">
             <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
-              {{ t('class') }}
+              {{ t('level') }}
             </span>
-            <!-- eslint-disable -->
-            <select
+            <input
+              ref="levelHook"
+              type="number"
+              min="1"
+              max="10"
+              step="1"
+              :value="modelValue.level"
               class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
-              :value="modelValue.class"
-              @change="onChangeSelect($event, 'class')"
+              @change="onChangeCounter($event, 'level')"
             >
-              <option value="">{{ t('withoutClass') }}</option>
-              <option
-                v-for="cls in munchkinClasses"
-                :key="cls"
-                :value="cls"
-              >
-                {{ t(cls) }}
-              </option>
-            </select>
-            <!-- eslint-enable -->
           </label>
-        </div>
-        <div class="w-full">
-          <label class="relative flex flex-col">
-            <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
-              {{ t('race') }}
-            </span>
-            <!-- eslint-disable -->
-            <select
-              class="w-full min-h-[32px] px-[10px] pt-[14px] rounded-[4px] bg-$secondary text-[12px] text-center focused"
-              :value="modelValue.race"
-              @change="onChangeSelect($event, 'race')"
-            >
-              <option
-                v-for="race in munchkinRaces"
-                :key="race"
-                :value="race"
-              >
-                {{ t(race) }}
-              </option>
-            </select>
-            <!-- eslint-enable -->
-          </label>
-        </div>
-      </div>
-
-      <div class="inline-flex flex-col items-center space-y-[8px]">
-        <button
-          class="button-default w-full"
-          @click="handleIncrement('gear')"
-        >
-          +
-        </button>
-        <label class="relative flex flex-col  max-w-[60px]">
-          <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
-            {{ t('gear') }}
-          </span>
-          <input
-            ref="gearHook"
-            type="number"
-            min="0"
-            max="99"
-            step="1"
-            :value="modelValue.gear"
-            class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
-            @change="onChangeCounter($event, 'gear')"
+          <button
+            class="button-default w-full"
+            @click="handleDecrement('level')"
           >
-        </label>
-        <button
-          class="button-default w-full"
-          @click="handleDecrement('gear')"
-        >
-          -
-        </button>
+            -
+          </button>
+        </div>
+
+        <div class="flex-1 w-full flex flex-col space-y-[8px]">
+          <div class="w-full flex items-center space-x-[8px]">
+            <p class="text-$typography-secondary">
+              {{ t('sex') }}:
+            </p>
+            <button
+              :class="modelValue.currentSex === true ? 'button-primary' : 'button-default'"
+              @click="handleSex(true)"
+            >
+              <icon-twemoji:male-sign class="w-[20px] h-[20px]" />
+            </button>
+            <button
+              :class="modelValue.currentSex === false ? 'button-primary' : 'button-default'"
+              @click="handleSex(false)"
+            >
+              <icon-twemoji:female-sign class="w-[20px] h-[20px]" />
+            </button>
+            <p class="text-$typography-secondary opacity-25 lowercase">
+              ({{ modelValue.currentSex ? t('male') : t('female') }})
+            </p>
+          </div>
+          <div class="w-full">
+            <label class="relative flex flex-col">
+              <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
+                {{ t('class') }}
+              </span>
+              <!-- eslint-disable -->
+              <select
+                class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
+                :value="modelValue.class"
+                @change="onChangeSelect($event, 'class')"
+              >
+                <option value="">{{ t('withoutClass') }}</option>
+                <option
+                  v-for="cls in munchkinClasses"
+                  :key="cls"
+                  :value="cls"
+                >
+                  {{ t(cls) }}
+                </option>
+              </select>
+              <!-- eslint-enable -->
+            </label>
+          </div>
+          <div class="w-full">
+            <label class="relative flex flex-col">
+              <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
+                {{ t('race') }}
+              </span>
+              <!-- eslint-disable -->
+              <select
+                class="w-full min-h-[32px] px-[10px] pt-[14px] rounded-[4px] bg-$secondary text-[12px] text-center focused"
+                :value="modelValue.race"
+                @change="onChangeSelect($event, 'race')"
+              >
+                <option
+                  v-for="race in munchkinRaces"
+                  :key="race"
+                  :value="race"
+                >
+                  {{ t(race) }}
+                </option>
+              </select>
+              <!-- eslint-enable -->
+            </label>
+          </div>
+        </div>
+
+        <div class="inline-flex flex-col items-center space-y-[8px]">
+          <button
+            class="button-default w-full"
+            @click="handleIncrement('gear')"
+          >
+            +
+          </button>
+          <label class="relative flex flex-col  max-w-[60px]">
+            <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
+              {{ t('gear') }}
+            </span>
+            <input
+              ref="gearHook"
+              type="number"
+              min="0"
+              max="99"
+              step="1"
+              :value="modelValue.gear"
+              class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
+              @change="onChangeCounter($event, 'gear')"
+            >
+          </label>
+          <button
+            class="button-default w-full"
+            @click="handleDecrement('gear')"
+          >
+            -
+          </button>
+        </div>
       </div>
-    </div>
-    <div v-else class="max-w-[1200px] h-[118px] px-[16px] mx-auto space-x-[16px]">
-      isSpecialTabOpen: {{ isSpecialTabOpen }}
-      # todo
+      <div v-if="isSpecialTabOpen || isTableVer" class="w-full h-[118px] px-[16px] mx-auto space-x-[16px]">
+        isSpecialTabOpen: {{ isSpecialTabOpen }}
+        # todo
+      </div>
     </div>
   </section>
 </template>
