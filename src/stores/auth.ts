@@ -17,6 +17,9 @@ export const useAuthStore = defineStore('auth-store', {
     hello: 'world',
   }),
   getters: {
+    getAuth(): any {
+      return auth
+    },
   },
   actions: {
     onSignIn(): void {
