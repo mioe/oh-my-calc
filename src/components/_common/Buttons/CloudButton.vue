@@ -3,6 +3,13 @@ import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth'
 import { toast, errorToast } from '@/use/useToast'
 
+defineProps({
+  positionY: {
+    type: String,
+    default: 'top',
+  },
+})
+
 const { t } = useI18n()
 const store = useAuthStore()
 const { onSignIn, onSignOut } = store
@@ -14,7 +21,7 @@ const handleSignIn = () => {
 const handleSignOut = async() => {
   try {
     await onSignOut()
-    toast(t('success'))
+    toast(t('success'), 'success')
   } catch (err) {
     console.error('🦕', err)
     errorToast('Error', `${err}`)
@@ -24,11 +31,10 @@ const handleSignOut = async() => {
 
 <template>
   <Dropdown
-    position-y="top"
+      :position-y="positionY"
   >
     <template #header="scope">
       <button
-        class="inline-flex min-w-[32px] min-h-[32px] justify-center items-center text-center rounded-[4px] overflow-hidden bg-$secondary"
         @click="scope.toggle"
       >
         <icon-carbon:cloud-upload />
