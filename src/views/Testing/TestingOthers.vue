@@ -1,83 +1,79 @@
 <script setup lang="ts">
-import { toast, errorToast } from '@/use/useToast'
+import { toast, errorToast, ToastTypes } from '@/use/useToast'
 
-const handleDefault = () => {
-  toast('🦕 handleDefault')
-}
+const allToast: ToastTypes[] = [
+  'default',
+  'info',
+  'warning',
+  'success',
+  'danger',
+]
 
-const handleInfo = () => {
-  toast('🦕 handleInfo', 'info')
-}
-
-const handleWarning = () => {
-  toast('🦕 handleWarning', 'warning')
-}
-
-
-const handleSuccess = () => {
-  toast('🦕 handleSuccess', 'success')
-}
-
-const handleDanger = () => {
-  toast('🦕 handleDanger', 'danger')
-}
-
-const handleError = () => {
-  errorToast('🦕 handleError', 'Some description....')
-}
+const handleToast = (type: ToastTypes) => { toast(`🦕 handle-${type}`, type) }
+const handleError = () => { errorToast('🦕 handle-error', 'Some description....') }
 </script>
 
 <template>
-  <section class="space-y-[24px]">
-    <div class="space-y-[8px]">
-      <h2 class="text-$primary">
-        # Others
-      </h2>
-    </div>
-
-    <div class="space-y-[8px]">
-      <h3 class="text-$primary">
-        # useToast
-      </h3>
-      <div class="opacity-50">
-        <a href="https://github.com/szboynono/mosha-vue-toastify" target="_blank">
-          https://github.com/szboynono/mosha-vue-toastify
-        </a>
+  <TestingWrapper>
+    <template #header>
+      Others
+    </template>
+    <template #default>
+      <!-- demo useToast -->
+      <div>
+        <h2>
+          useToast
+        </h2>
+        <div class="text-$typography-secondary">
+          <a href="https://github.com/szboynono/mosha-vue-toastify" target="_blank">
+            https://github.com/szboynono/mosha-vue-toastify
+          </a>
+        </div>
+        <div>
+          <button
+            v-for="toast in allToast"
+            :key="toast"
+            class="button-default mr-[8px] mb-[8px]"
+            @click="handleToast(toast)"
+          >
+            {{ toast }}
+          </button>
+          <button
+            class="button-default mr-[8px] mb-[8px]"
+            @click="handleError"
+          >
+            error
+          </button>
+        </div>
       </div>
-
-      <button class="button-default mr-[8px] mb-[8px]" @click="handleDefault">
-        Default
-      </button>
-      <button class="button-default mr-[8px] mb-[8px]" @click="handleInfo">
-        Info
-      </button>
-      <button class="button-default mr-[8px] mb-[8px]" @click="handleWarning">
-        Warning
-      </button>
-      <button class="button-default mr-[8px] mb-[8px]" @click="handleSuccess">
-        Success
-      </button>
-      <button class="button-default mr-[8px] mb-[8px]" @click="handleDanger">
-        Danger
-      </button>
-      <button class="button-default mr-[8px] mb-[8px]" @click="handleError">
-        Error
-      </button>
-    </div>
-
-    <div class="space-y-[8px]">
-      <h3 class="text-$primary">
-        # unplugin-icons
-      </h3>
-      <div class="opacity-50">
-        <a href="https://github.com/antfu/unplugin-icons" target="_blank">
-          https://github.com/antfu/unplugin-icons
-        </a>
+      <!-- /demo useToast -->
+      <!-- demo unplugin-icons -->
+      <div>
+        <h2>
+          unplugin-icons
+        </h2>
+        <div class="text-$typography-secondary">
+          <a href="https://github.com/antfu/unplugin-icons" target="_blank">
+            https://github.com/antfu/unplugin-icons
+          </a>
+        </div>
+        <div>
+          <p>My icons in folder <span class="opacity-25">(@/assets/icons)</span></p>
+          <icon-mi:robe />
+          <icon-mi:ifrit />
+          <icon-mi:reaper-scythe />
+          <icon-mi:google-g-logo />
+        </div>
+        <div>
+          <p>Remote icons <a class="opacity-25" href="https://icones.netlify.app/" target="_blank">(https://icones.netlify.app/)</a></p>
+          <icon-flat-color-icons:address-book/>
+          <icon-flat-color-icons:google />
+          <icon-mdi:account-circle />
+          <icon-uil:bitcoin />
+          <icon-ri:app-store-fill />
+        </div>
       </div>
-
-      <icon-mi:robe />
-      <icon-mi:ifrit />
-      <icon-mi:reaper-scythe />
-    </div>
-  </section>
+      <!-- /demo unplugin-icons -->
+    </template>
+  </TestingWrapper>
 </template>

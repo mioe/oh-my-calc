@@ -10,12 +10,9 @@ const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.va
     v-if="!isPortrait"
     class="sticky bottom-0 left-0 z-2 w-full h-[48px] mt-auto px-[16px] space-x-[8px] flex items-center justify-between bg-$document"
   >
-    <router-link
-      :to="{name: 'Home'}"
-      class="font-medium"
-    >
+    <p class="font-medium">
       OhMy<span class="text-$primary">Calc</span>
-    </router-link>
+    </p>
 
     <div class="flex-1 w-full flex justify-end items-center space-x-[8px]">
       <WindowSizeIndicator />

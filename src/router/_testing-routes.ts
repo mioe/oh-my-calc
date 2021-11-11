@@ -35,6 +35,11 @@ const routes = [
         component: () => import('@/views/Testing/TestingDropdown.vue'),
       },
       {
+        path: 'munchkin-calculator',
+        name: 'TestingMunchkinCalculator',
+        component: () => import('@/views/Testing/TestingMunchkinCalculator.vue'),
+      },
+      {
         path: 'others',
         name: 'TestingOthers',
         component: () => import('@/views/Testing/TestingOthers.vue'),

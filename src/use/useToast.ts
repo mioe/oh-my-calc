@@ -1,6 +1,6 @@
 import { createToast } from 'mosha-vue-toastify'
 
-type ToastTypes = 'default' | 'info' | 'warning' | 'success' | 'danger'
+export type ToastTypes = 'default' | 'info' | 'warning' | 'success' | 'danger'
 
 const timeout = 4000
 // const timeout = 999999999
