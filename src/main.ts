@@ -9,6 +9,7 @@ import '@/plugins/firebase'
 import head from '@/plugins/vueuse-head'
 import i18n from '@/plugins/vue-i18n'
 import pinia from '@/plugins/pinia'
+import maska from 'maska'
 
 /**
  * Styles
@@ -31,4 +32,5 @@ createApp(App)
   .use(i18n)
   .use(router)
   .use(head)
+  .use(maska)
   .mount('#app')

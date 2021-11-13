@@ -1,5 +1,5 @@
 <template>
   <div>
-    Main Tab
+    <MunchkinCalculatorPanelInputNumber />
   </div>
 </template>

@@ -24,6 +24,7 @@ const emit = defineEmits<{
 }>()
 
 const handlePanel = (key: 'edit' | 'remove') => {
+  console.log('🦕 handlePanel', key)
   // @ts-ignore
   emit(`handle-${key}`)
 }

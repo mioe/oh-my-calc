@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue'
 
+const MunchkinCalculatorPanelInputNumberProps: Ref<any> = ref({
+  modelValue: 0,
+  placeholder: 'w-[60px]',
+  min: 0,
+  max: 10,
+  step: 1,
+})
+
 const MunchkinCalculatorPanelProps: Ref<any> = ref(null)
 const togglePanel = () => {
   MunchkinCalculatorPanelProps.value = MunchkinCalculatorPanelProps.value === null
@@ -17,6 +25,19 @@ const togglePanel = () => {
       TestingMunchkinCalculatorElements
     </template>
     <template #default>
+      <div>
+        <h2>
+          MunchkinCalculatorPanelInputNumber
+        </h2>
+        <TestingPropsTable :props="MunchkinCalculatorPanelInputNumberProps" />
+        <MunchkinCalculatorPanelInputNumber
+          v-model="MunchkinCalculatorPanelInputNumberProps.modelValue"
+          :placeholder="MunchkinCalculatorPanelInputNumberProps.placeholder"
+          :min="MunchkinCalculatorPanelInputNumberProps.min"
+          :max="MunchkinCalculatorPanelInputNumberProps.max"
+          :step="MunchkinCalculatorPanelInputNumberProps.step"
+        />
+      </div>
       <!-- demo MunchkinCalculatorPanel -->
       <div>
         <h2>
