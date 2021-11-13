@@ -69,7 +69,6 @@ const handleHide = () => {
   emit('handle-hide')
 }
 
-
 const onChangeSelect = (event: any, hook: 'class' | 'race') => {
   const obj = {
     ...props.modelValue,

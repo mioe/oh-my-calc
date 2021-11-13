@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, computed, ComputedRef, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { ref, Ref, computed, ComputedRef } from 'vue'
 import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
 import { useWindowSize } from '@vueuse/core'
 
@@ -11,7 +10,7 @@ const { width, height } = useWindowSize()
 const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.value)
 const isTableVer: ComputedRef<boolean> = computed(() => width.value >= 768)
 
-const props = defineProps({
+defineProps({
   modelValue: {
     type: Object,
     default: null,
@@ -20,12 +19,26 @@ const props = defineProps({
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: any): void,
+  (e: 'handle-edit'): void,
+  (e: 'handle-remove'): void,
 }>()
 
-onMounted(() => {
-  console.log('🦕 munchkinRaces', munchkinRaces)
-  console.log('🦕 munchkinClasses', munchkinClasses)
-})
+const handlePanel = (key: 'edit' | 'remove') => {
+  // @ts-ignore
+  emit(`handle-${key}`)
+}
+
+const isOpenAdditionalTab: Ref<boolean> = ref(false)
+const isShowAdditionalTab: ComputedRef<boolean> = computed(() =>
+  isOpenAdditionalTab.value || isTableVer.value
+)
+const toggleAdditionalTab = () => {
+  isOpenAdditionalTab.value = !isOpenAdditionalTab.value
+}
+
+const toggleHide = () => {
+  emit('update:modelValue', null)
+}
 </script>
 
 <template>
@@ -40,9 +53,20 @@ onMounted(() => {
     <div class="max-w-[1200px] mx-auto px-[16px] space-y-[16px]">
       <MunchkinCalculatorPanelHeader
         :name="modelValue.name"
+        :is-open-additional-tab="isOpenAdditionalTab"
+        @handle-hide="toggleHide"
+        @handle-additional="toggleAdditionalTab"
+        @handle-edit="handlePanel('edit')"
+        @handle-remove="handlePanel('remove')"
       />
-      MunchkinCalculatorPanel
-      {{ modelValue }}
+      <div class="grid grid-cols-2 gap-x-[16px]">
+        <MunchkinCalculatorPanelMainTab
+          v-if="!isOpenAdditionalTab || isTableVer"
+        />
+        <MunchkinCalculatorPanelAdditionalTab
+          v-if="isShowAdditionalTab"
+        />
+      </div>
     </div>
   </section>
 </template>

@@ -7,12 +7,16 @@ defineProps({
     type: String,
     default: null,
   },
+  isOpenAdditionalTab: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits([
   'handle-hide',
+  'handle-additional',
   'handle-edit',
-  'handle-special-tab',
   'handle-remove',
 ])
 </script>
@@ -25,30 +29,40 @@ const emit = defineEmits([
     <div class="space-x-[8px]">
         <button
           class="button-default space-x-[4px]"
+          @click="emit('handle-hide')"
         >
           <icon-carbon:previous-outline />
           <span>
             {{ t('hide') }}
           </span>
         </button>
-        <button
-          :class="true ? 'button-primary' : 'button-default'"
-        >
-          <icon-carbon:accessibility-alt />
-        </button>
+        <span class="md:hidden">
+          <button
+            class="space-x-[4px]"
+            :class="isOpenAdditionalTab ? 'button-primary' : 'button-default'"
+            @click="emit('handle-additional')"
+          >
+            <icon-carbon:accessibility-alt />
+            <span class="hidden md:inline">
+              {{ t('additional') }}
+            </span>
+          </button>
+        </span>
         <button
           class="button-default space-x-[4px]"
+          @click="emit('handle-edit')"
         >
           <icon-carbon:edit />
-          <span>
+          <span class="hidden md:inline">
             {{ t('edit') }}
           </span>
         </button>
         <button
           class="button-default space-x-[4px]"
+          @click="emit('handle-remove')"
         >
           <icon-carbon:delete />
-          <span>
+          <span class="hidden md:inline">
             {{ t('remove') }}
           </span>
         </button>
