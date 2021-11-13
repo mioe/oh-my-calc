@@ -38,9 +38,7 @@ const handleDecrement = () => {
   onChange(hook.value)
 }
 
-// Event & { target: HTMLInputElement }
-const onChange = (el: HTMLInputElement | null) => {
-  console.log('🦕 event', el?.value)
+const onChange = (el: any) => {
   emit('update:modelValue', Number(el?.value))
 }
 </script>
