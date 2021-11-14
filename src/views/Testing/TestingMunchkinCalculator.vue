@@ -2,11 +2,28 @@
 import { ref, Ref } from 'vue'
 
 const MunchkinCalculatorPanelInputNumberProps: Ref<any> = ref({
-  modelValue: 0,
-  placeholder: 'w-[60px]',
+  'v-model': 0,
+  placeholder: 'Placeholder',
   min: 0,
   max: 10,
   step: 1,
+  'max-width': 'none',
+})
+
+const MunchkinCalculatorPanelSelectProps: Ref<any> = ref({
+  'v-model': null,
+  placeholder: 'Placeholder',
+  options: [
+    { value: '', text: 'Empty value' },
+    { value: null, text: 'Null value' },
+    { value: true, text: 'Boolean value' },
+    { value: 1, text: 'Number value' },
+    { value: 'tada', text: 'String value' },
+  ],
+  style: {
+    fontSize: '12px',
+    minHeight: '32px',
+  },
 })
 
 const MunchkinCalculatorPanelProps: Ref<any> = ref(null)
@@ -25,19 +42,41 @@ const togglePanel = () => {
       TestingMunchkinCalculatorElements
     </template>
     <template #default>
+      <!-- demo MunchkinCalculatorPanelInputNumber -->
       <div>
         <h2>
           MunchkinCalculatorPanelInputNumber
         </h2>
         <TestingPropsTable :props="MunchkinCalculatorPanelInputNumberProps" />
         <MunchkinCalculatorPanelInputNumber
-          v-model="MunchkinCalculatorPanelInputNumberProps.modelValue"
+          v-model="MunchkinCalculatorPanelInputNumberProps['v-model']"
           :placeholder="MunchkinCalculatorPanelInputNumberProps.placeholder"
           :min="MunchkinCalculatorPanelInputNumberProps.min"
           :max="MunchkinCalculatorPanelInputNumberProps.max"
           :step="MunchkinCalculatorPanelInputNumberProps.step"
+          :max-width="MunchkinCalculatorPanelInputNumberProps['max-width']"
         />
       </div>
+      <!-- /demo MunchkinCalculatorPanelInputNumber -->
+      <!-- demo MunchkinCalculatorPanelSelect -->
+      <div>
+        <h2>
+          MunchkinCalculatorPanelSelect
+        </h2>
+        <TestingPropsTable :props="MunchkinCalculatorPanelSelectProps" />
+        <MunchkinCalculatorPanelSelect
+          v-model="MunchkinCalculatorPanelSelectProps['v-model']"
+          :placeholder="MunchkinCalculatorPanelSelectProps.placeholder"
+          :options="MunchkinCalculatorPanelSelectProps.options"
+        />
+        <MunchkinCalculatorPanelSelect
+          v-model="MunchkinCalculatorPanelSelectProps['v-model']"
+          :placeholder="MunchkinCalculatorPanelSelectProps.placeholder"
+          :options="MunchkinCalculatorPanelSelectProps.options"
+          :style="MunchkinCalculatorPanelSelectProps.style"
+        />
+      </div>
+      <!-- /demo MunchkinCalculatorPanelSelect -->
       <!-- demo MunchkinCalculatorPanel -->
       <div>
         <h2>

@@ -18,7 +18,7 @@ defineProps({
         :key="key"
       >
         <td>{{ key }}</td>
-        <td><span class="opacity-50">{{ `${value}` }}</span></td>
+        <td><span class="opacity-50">{{ `${ Array.isArray(value) || typeof value === 'object' ? JSON.stringify(value) : value }` }}</span></td>
       </tr>
     </table>
   </div>

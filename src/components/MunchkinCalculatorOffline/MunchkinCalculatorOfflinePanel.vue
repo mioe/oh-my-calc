@@ -179,7 +179,6 @@ const onChangeSelect = (event: any, hook: 'class' | 'race') => {
               <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
                 {{ t('class') }}
               </span>
-              <!-- eslint-disable -->
               <select
                 class="w-full min-h-[37px] px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-[16px] text-center focused"
                 :value="modelValue.class"
@@ -194,7 +193,6 @@ const onChangeSelect = (event: any, hook: 'class' | 'race') => {
                   {{ t(cls) }}
                 </option>
               </select>
-              <!-- eslint-enable -->
             </label>
           </div>
           <div class="w-full">

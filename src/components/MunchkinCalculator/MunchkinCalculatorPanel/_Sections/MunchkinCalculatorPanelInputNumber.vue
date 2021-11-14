@@ -22,6 +22,10 @@ defineProps({
     type: Number,
     default: 1,
   },
+  maxWidth: {
+    type: String,
+    default: '60px',
+  },
 })
 
 const emit = defineEmits<{
@@ -51,7 +55,12 @@ const onChange = (el: any) => {
     >
       +
     </button>
-    <label class="relative flex flex-col max-w-[60px]">
+    <label
+      class="relative flex flex-col"
+      :style="{
+        maxWidth,
+      }"
+    >
       <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
         {{ placeholder }}
       </span>
