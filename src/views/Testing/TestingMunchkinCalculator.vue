@@ -7,7 +7,9 @@ const MunchkinCalculatorPanelInputNumberProps: Ref<any> = ref({
   min: 0,
   max: 10,
   step: 1,
-  'max-width': 'none',
+  style: {
+    width: '150px',
+  },
 })
 
 const MunchkinCalculatorPanelSelectProps: Ref<any> = ref({
@@ -54,7 +56,7 @@ const togglePanel = () => {
           :min="MunchkinCalculatorPanelInputNumberProps.min"
           :max="MunchkinCalculatorPanelInputNumberProps.max"
           :step="MunchkinCalculatorPanelInputNumberProps.step"
-          :max-width="MunchkinCalculatorPanelInputNumberProps['max-width']"
+          :style="MunchkinCalculatorPanelInputNumberProps.style"
         />
       </div>
       <!-- /demo MunchkinCalculatorPanelInputNumber -->

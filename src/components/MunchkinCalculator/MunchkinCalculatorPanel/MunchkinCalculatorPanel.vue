@@ -60,7 +60,7 @@ const toggleHide = () => {
         @handle-edit="handlePanel('edit')"
         @handle-remove="handlePanel('remove')"
       />
-      <div class="grid grid-cols-2 gap-x-[16px]">
+      <div class="grid md:grid-cols-2 md:gap-x-[16px]">
         <MunchkinCalculatorPanelMainTab
           v-if="!isOpenAdditionalTab || isTableVer"
         />

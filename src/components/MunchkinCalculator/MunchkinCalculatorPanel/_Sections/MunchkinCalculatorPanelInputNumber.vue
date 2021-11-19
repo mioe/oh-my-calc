@@ -22,14 +22,17 @@ defineProps({
     type: Number,
     default: 1,
   },
-  maxWidth: {
-    type: String,
-    default: '60px',
+  style: {
+    type: Object,
+    default: () => ({
+      maxWidth: '60px',
+    }),
   },
 })
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: number): void,
+  (e: 'change', value: number): void,
 }>()
 
 const hook: Ref<HTMLInputElement | null>  = ref(null)
@@ -44,6 +47,7 @@ const handleDecrement = () => {
 
 const onChange = (el: any) => {
   emit('update:modelValue', Number(el?.value))
+  emit('change', Number(el?.value))
 }
 </script>
 
@@ -57,9 +61,7 @@ const onChange = (el: any) => {
     </button>
     <label
       class="relative flex flex-col"
-      :style="{
-        maxWidth,
-      }"
+      :style="style"
     >
       <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
         {{ placeholder }}

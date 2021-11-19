@@ -27,10 +27,12 @@ defineProps({
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: any): void,
+  (e: 'change', value: any): void,
 }>()
 
 const onChange = (el: any) => {
   emit('update:modelValue', el?.value)
+  emit('change', el?.value)
 }
 </script>
 

@@ -12,12 +12,12 @@ const props = defineProps({
   positionX: {
     type: String,
     default: 'left',
-    validator: (x: string) => ['right', 'left'].indexOf(x) !== -1,
+    validator: (x: string) => ['right', 'left'].includes(x),
   },
   positionY: {
     type: String,
     default: 'bottom',
-    validator: (x: string) => ['top', 'bottom'].indexOf(x) !== -1,
+    validator: (x: string) => ['top', 'bottom'].includes(x),
   },
   keepOnContentClick: {
     type: Boolean,
@@ -30,11 +30,11 @@ const props = defineProps({
 })
 
 onMounted(() => {
-  document.addEventListener('click', handleClickaway)
+  document.addEventListener('click', handleClickAway)
 })
 
 onBeforeUnmount(() => {
-  document.removeEventListener('click', handleClickaway)
+  document.removeEventListener('click', handleClickAway)
 })
 
 const isOpen: Ref<boolean> = ref(false)
@@ -107,7 +107,7 @@ const resetPositions = () => {
   resetPositionY()
 }
 
-const handleClickaway = (ev: any) => {
+const handleClickAway = (ev: any) => {
   const shouldClose = props.keepOnContentClick
     ? !menuHook.value?.contains(ev.target)
     : true
