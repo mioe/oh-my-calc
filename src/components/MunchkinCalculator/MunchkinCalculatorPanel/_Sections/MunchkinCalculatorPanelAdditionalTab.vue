@@ -35,16 +35,24 @@ const handleChange = (key: string, ev: any) => {
 
 <template>
   <div class="w-full mx-auto">
-    <div class="grid gap-y-[8px]">
+    <div class="grid grid-cols-[50px,1fr] gap-x-[16px] gap-y-[8px]">
+      <label class="custom-checkbox justify-center bg-$secondary rounded-[4px]">
+        <input type="checkbox">
+      </label>
       <MunchkinCalculatorPanelSelect
         :model-value="secondClass"
         :placeholder="t('class')"
+        align="left"
         :options="classes"
         @change="handleChange('secondClass', $event)"
       />
+      <label class="custom-checkbox justify-center bg-$secondary rounded-[4px]">
+        <input type="checkbox">
+      </label>
       <MunchkinCalculatorPanelSelect
         :model-value="secondRace"
         :placeholder="t('race')"
+        align="left"
         :options="races"
         @change="handleChange('secondRace', $event)"
       />

@@ -22,6 +22,7 @@ const MunchkinCalculatorPanelSelectProps: Ref<any> = ref({
     { value: 1, text: 'Number value' },
     { value: 'tada', text: 'String value' },
   ],
+  align: 'left',
   style: {
     fontSize: '12px',
     minHeight: '32px',
@@ -81,6 +82,7 @@ watch(MunchkinCalculatorPanelProps,
         <MunchkinCalculatorPanelSelect
           v-model="MunchkinCalculatorPanelSelectProps['v-model']"
           :placeholder="MunchkinCalculatorPanelSelectProps.placeholder"
+          :align="MunchkinCalculatorPanelSelectProps.align"
           :options="MunchkinCalculatorPanelSelectProps.options"
         />
         <MunchkinCalculatorPanelSelect

@@ -23,6 +23,11 @@ defineProps({
       minHeight: '37px',
     }),
   },
+  align: {
+    type: String,
+    default: 'center',
+    validator: (x: string) => ['center', 'right', 'left'].includes(x),
+  },
 })
 
 const emit = defineEmits<{
@@ -38,11 +43,22 @@ const onChange = (el: any) => {
 
 <template>
   <label class="relative flex flex-col">
-    <span class="absolute top-[4px] left-[50%] transform -translate-x-[50%] text-$typography-secondary text-[11px]">
+    <span
+      :class="[
+        'absolute top-[4px] text-$typography-secondary text-[11px]',
+        { 'left-[50%] transform -translate-x-[50%]': align === 'center' },
+        { 'left-[10px]': align === 'left' },
+        { 'right-[10px]': align === 'right' },
+      ]">
       {{ placeholder }}
     </span>
     <select
-      class="w-full px-[10px] pt-[16px] rounded-[4px] bg-$secondary text-center focused"
+      :class="[
+        'w-full px-[10px] pt-[16px] rounded-[4px] bg-$secondary focused',
+        { 'text-center': align === 'center' },
+        { 'text-left': align === 'left' },
+        { 'text-right': align === 'right' },
+      ]"
       :style="style"
       :value="modelValue"
       @change="onChange($event.target)"

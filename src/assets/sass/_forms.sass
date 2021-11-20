@@ -23,3 +23,14 @@ select.focused
   &:focus
     outline: none
     box-shadow: 0 0 0 .2rem var(--primary)
+
+
+.custom-checkbox
+  @apply inline-flex items-center
+  input[type=checkbox]
+    @apply absolute -z-1 w-[1px] h-[1px] opacity-0
+  &::before
+    content: ''
+    @apply inline-block w-[18px] h-[18px] border border-$document rounded-[4px]
+
+
