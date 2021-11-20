@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ComputedRef, ref, Ref, nextTick, watchEffect } from 'vue'
+import { computed, ComputedRef, ref, Ref, nextTick, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { toast } from '@/use/useToast'
 import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
@@ -9,14 +9,18 @@ const { createMunchkin, removeMunchkin, editMunchkin, clearMunchkins, restartGam
 const munchkins: ComputedRef<Array<any>> = computed(() => store.getMunchkins)
 
 const selectedMunchkin: Ref<any> = ref(null)
+watch(
+  selectedMunchkin,
+  (val: any) => {
+    if (val) {
+      editMunchkin(selectedMunchkin.value)
+    }
+  },
+  { deep: true },
+)
 const handleFocus = (munchkin: any): void => {
   selectedMunchkin.value = munchkin
 }
-watchEffect(() => {
-  if (selectedMunchkin.value !== null) {
-    editMunchkin(selectedMunchkin.value)
-  }
-})
 
 const isOpenModalRemove: Ref<boolean> = ref(false)
 const handleRemove = () => {
@@ -210,12 +214,10 @@ const handleRestartGame = (isAccepted = false) => {
     leave-from-class="transform opacity-100 scale-100"
     leave-to-class="transform opacity-0 scale-95"
   >
-    <MunchkinCalculatorOfflinePanel
-      v-if="selectedMunchkin"
+    <MunchkinCalculatorPanel
       v-model="selectedMunchkin"
       @handle-remove="handleRemove"
       @handle-edit="handleEdit"
-      @handle-hide="selectedMunchkin = null"
     />
   </transition>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
+import { ref, Ref, watch } from 'vue'
 
 const MunchkinCalculatorPanelInputNumberProps: Ref<any> = ref({
   'v-model': 0,
@@ -41,6 +41,13 @@ const togglePanel = () => {
     }
     : null
 }
+
+watch(MunchkinCalculatorPanelProps,
+  (val: any) => {
+    console.log('🦕 val', val.level)
+  },
+  { deep: true },
+)
 </script>
 
 <template>
@@ -101,7 +108,7 @@ const togglePanel = () => {
             Toggle panel
           </button>
         </div>
-        <div class="h-[500px]" />
+        <div class="h-[190px]" />
         <transition
           enter-active-class="transition ease-out duration-100"
           enter-from-class="transform opacity-0 scale-95"
