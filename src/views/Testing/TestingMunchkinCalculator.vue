@@ -32,7 +32,12 @@ const MunchkinCalculatorPanelProps: Ref<any> = ref(null)
 const togglePanel = () => {
   MunchkinCalculatorPanelProps.value = MunchkinCalculatorPanelProps.value === null
     ? {
-      name: 'Wwwwwwwwwwwwwwwwwwwwwwwww',
+      name: 'Wwwww',
+      currentSex: true,
+      level: 1,
+      gear: 0,
+      class: null,
+      race: 'human',
     }
     : null
 }
@@ -84,6 +89,10 @@ const togglePanel = () => {
         <h2>
           MunchkinCalculatorPanel
         </h2>
+        <TestingPropsTable
+          v-if="MunchkinCalculatorPanelProps"
+          :props="MunchkinCalculatorPanelProps"
+        />
         <div>
           <button
             class="button-default"
@@ -92,6 +101,7 @@ const togglePanel = () => {
             Toggle panel
           </button>
         </div>
+        <div class="h-[500px]" />
         <transition
           enter-active-class="transition ease-out duration-100"
           enter-from-class="transform opacity-0 scale-95"

@@ -4,6 +4,7 @@ const { t } = useI18n()
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void,
+  (e: 'change', value: boolean): void,
 }>()
 
 defineProps({
@@ -15,6 +16,7 @@ defineProps({
 
 const handleSex = (bool: boolean) => {
   emit('update:modelValue', bool)
+  emit('change', bool)
 }
 </script>
 

@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { ref, Ref, computed, ComputedRef } from 'vue'
-import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
 import { useWindowSize } from '@vueuse/core'
-
-const store = useMunchkinCalculatorOfflineStore()
-const { munchkinRaces, munchkinClasses } = store
 
 const { width, height } = useWindowSize()
 const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.value)
@@ -63,6 +59,11 @@ const toggleHide = () => {
       <div class="grid md:grid-cols-2 md:gap-x-[16px]">
         <MunchkinCalculatorPanelMainTab
           v-if="!isOpenAdditionalTab || isTableVer"
+          v-model:sex="modelValue.currentSex"
+          v-model:level="modelValue.level"
+          v-model:gear="modelValue.gear"
+          v-model:class="modelValue.class"
+          v-model:race="modelValue.race"
         />
         <MunchkinCalculatorPanelAdditionalTab
           v-if="isShowAdditionalTab"
