@@ -37,7 +37,7 @@ const handleSex = (bool: boolean) => {
     >
       <icon-twemoji:female-sign class="w-[20px] h-[20px]" />
     </button>
-    <p class="text-$typography-secondary opacity-25 lowercase">
+    <p class="text-$typography-secondary opacity-25 lowercase truncate max-w-[calc(100vw-300px)] md:max-w-none">
       ({{ modelValue ? t('male') : t('female') }})
     </p>
   </div>

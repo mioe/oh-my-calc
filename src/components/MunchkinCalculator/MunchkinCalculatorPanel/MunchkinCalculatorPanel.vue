@@ -1,6 +1,23 @@
 <script setup lang="ts">
 import { ref, Ref, computed, ComputedRef } from 'vue'
 import { useWindowSize } from '@vueuse/core'
+import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
+import { useI18n } from 'vue-i18n'
+
+const store = useMunchkinCalculatorOfflineStore()
+const { munchkinRaces, munchkinClasses } = store
+
+const { t } = useI18n()
+
+const races = computed(() => munchkinRaces
+  .map((race: string) => ({ text: t(race), value: race }))
+)
+const classes = computed(() => {
+  return [
+    { text: t('withoutClass'), value: '' },
+    ...munchkinClasses.map((cls: string) => ({ text: t(cls), value: cls })),
+  ]
+})
 
 const { width, height } = useWindowSize()
 const isPortrait: ComputedRef<boolean> = computed(() => width.value >= height.value)
@@ -56,7 +73,7 @@ const toggleHide = () => {
         @handle-edit="handlePanel('edit')"
         @handle-remove="handlePanel('remove')"
       />
-      <div class="grid md:grid-cols-2 md:gap-x-[16px]">
+      <div class="grid md:grid-cols-2 md:gap-x-[16px] min-h-[118px]">
         <MunchkinCalculatorPanelMainTab
           v-if="!isOpenAdditionalTab || isTableVer"
           v-model:sex="modelValue.currentSex"
@@ -64,9 +81,13 @@ const toggleHide = () => {
           v-model:gear="modelValue.gear"
           v-model:class="modelValue.class"
           v-model:race="modelValue.race"
+          :classes="classes"
+          :races="races"
         />
         <MunchkinCalculatorPanelAdditionalTab
           v-if="isShowAdditionalTab"
+          :classes="classes"
+          :races="races"
         />
       </div>
     </div>

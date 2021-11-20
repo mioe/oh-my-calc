@@ -25,7 +25,7 @@ defineProps({
   style: {
     type: Object,
     default: () => ({
-      maxWidth: '60px',
+      width: '60px',
     }),
   },
 })

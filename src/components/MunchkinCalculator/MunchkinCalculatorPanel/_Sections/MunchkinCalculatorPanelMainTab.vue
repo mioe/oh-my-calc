@@ -1,22 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useMunchkinCalculatorOfflineStore } from '@/stores/munchkin-calculator-offline'
 import { useI18n } from 'vue-i18n'
 
-const store = useMunchkinCalculatorOfflineStore()
-const { munchkinRaces, munchkinClasses } = store
-
 const { t } = useI18n()
-
-const races = computed(() => munchkinRaces
-  .map((race: string) => ({ text: t(race), value: race }))
-)
-const classes = computed(() => {
-  return [
-    { text: t('withoutClass'), value: '' },
-    ...munchkinClasses.map((cls: string) => ({ text: t(cls), value: cls })),
-  ]
-})
 
 defineProps({
   level: {
@@ -39,6 +24,14 @@ defineProps({
     type: Number,
     default: 0,
   },
+  classes: {
+    type: Array,
+    default: () => ([]),
+  },
+  races: {
+    type: Array,
+    default: () => ([]),
+  }
 })
 
 const emit = defineEmits<{
@@ -56,7 +49,7 @@ const handleChange = (key: string, ev: any) => {
 </script>
 
 <template>
-  <div class="w-full h-[118px] mx-auto flex items-start space-x-[16px] justify-between">
+  <div class="w-full mx-auto flex items-start space-x-[16px] justify-between">
     <MunchkinCalculatorPanelInputNumber
       :model-value="level"
       :placeholder="t('level')"
