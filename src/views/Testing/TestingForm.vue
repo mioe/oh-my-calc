@@ -20,6 +20,10 @@ const materialTextareaProps: Ref<any> = ref({
   disabled: false,
   required: undefined,
 })
+
+const CheckboxProps: Ref<any> = ref({
+  'v-model': false,
+})
 </script>
 
 <template>
@@ -80,6 +84,18 @@ const materialTextareaProps: Ref<any> = ref({
         :disabled="materialTextareaProps.disabled"
         :required="materialTextareaProps.required"
       />
+    </div>
+
+    <div class="space-y-[8px]">
+      <h3 class="text-$primary">
+        # Checkbox {{ CheckboxProps['v-model'] }}
+      </h3>
+
+      <Checkbox
+        v-model="CheckboxProps['v-model']"
+      >
+        Test
+      </Checkbox>
     </div>
   </section>
 </template>
