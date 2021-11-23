@@ -21,9 +21,7 @@ const handleError = () => { errorToast('🦕 handle-error', 'Some description...
     <template #default>
       <!-- demo useToast -->
       <div>
-        <h2>
-          useToast
-        </h2>
+        <h2>useToast</h2>
         <div class="text-$typography-secondary">
           <a href="https://github.com/szboynono/mosha-vue-toastify" target="_blank">
             https://github.com/szboynono/mosha-vue-toastify
@@ -49,9 +47,7 @@ const handleError = () => { errorToast('🦕 handle-error', 'Some description...
       <!-- /demo useToast -->
       <!-- demo unplugin-icons -->
       <div>
-        <h2>
-          unplugin-icons
-        </h2>
+        <h2>unplugin-icons</h2>
         <div class="text-$typography-secondary">
           <a href="https://github.com/antfu/unplugin-icons" target="_blank">
             https://github.com/antfu/unplugin-icons

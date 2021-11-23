@@ -43,9 +43,7 @@ const togglePanel = () => {
 }
 
 watch(MunchkinCalculatorPanelProps,
-  (val: any) => {
-    console.log('🦕 val', val.level)
-  },
+  (val: any) => { console.log('🦕 watch detected', val?.level )},
   { deep: true },
 )
 </script>
@@ -58,9 +56,7 @@ watch(MunchkinCalculatorPanelProps,
     <template #default>
       <!-- demo MunchkinCalculatorPanelInputNumber -->
       <div>
-        <h2>
-          MunchkinCalculatorPanelInputNumber
-        </h2>
+        <h2>MunchkinCalculatorPanelInputNumber</h2>
         <TestingPropsTable :props="MunchkinCalculatorPanelInputNumberProps" />
         <MunchkinCalculatorPanelInputNumber
           v-model="MunchkinCalculatorPanelInputNumberProps['v-model']"
@@ -74,9 +70,7 @@ watch(MunchkinCalculatorPanelProps,
       <!-- /demo MunchkinCalculatorPanelInputNumber -->
       <!-- demo MunchkinCalculatorPanelSelect -->
       <div>
-        <h2>
-          MunchkinCalculatorPanelSelect
-        </h2>
+        <h2>MunchkinCalculatorPanelSelect</h2>
         <TestingPropsTable :props="MunchkinCalculatorPanelSelectProps" />
         <MunchkinCalculatorPanelSelect
           v-model="MunchkinCalculatorPanelSelectProps['v-model']"
@@ -93,9 +87,7 @@ watch(MunchkinCalculatorPanelProps,
       <!-- /demo MunchkinCalculatorPanelSelect -->
       <!-- demo MunchkinCalculatorPanel -->
       <div>
-        <h2>
-          MunchkinCalculatorPanel
-        </h2>
+        <h2>MunchkinCalculatorPanel</h2>
         <TestingPropsTable
           v-if="MunchkinCalculatorPanelProps"
           :props="MunchkinCalculatorPanelProps"

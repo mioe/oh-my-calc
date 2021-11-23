@@ -21,12 +21,26 @@ const props = defineProps({
     type: [Boolean, String, Number],
     default: false,
   },
-  checked: Boolean,
-  id: String,
-  name: String,
-  round: Boolean,
-  disabled: Boolean,
-  indeterminate: Boolean,
+  id: {
+    type: String,
+    default: undefined,
+  },
+  checked: {
+    type: Boolean,
+    default: undefined,
+  },
+  name: {
+    type: String,
+    default: undefined,
+  },
+  disabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  indeterminate: {
+    type: Boolean,
+    default: undefined,
+  },
 })
 
 const emit = defineEmits<{
@@ -46,6 +60,7 @@ const computedValue = computed({
 <template>
   <label class="mi-checkbox inline-flex relative cursor-pointer items-center">
     <input
+      :id="id"
       v-model="computedValue"
       type="checkbox"
       :name="name"

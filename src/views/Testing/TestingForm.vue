@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
+import { ref } from 'vue'
 
-const materialInputProps: Ref<any> = ref({
+const MaterialInputProps = ref({
   id: 'testInput',
   'v-model': '',
   type: 'text',
@@ -12,7 +12,7 @@ const materialInputProps: Ref<any> = ref({
   required: undefined,
 })
 
-const materialTextareaProps: Ref<any> = ref({
+const MaterialTextarearops = ref({
   id: 'testTextarea',
   'v-model': '',
   placeholder: 'MaterialTextarea',
@@ -21,81 +21,79 @@ const materialTextareaProps: Ref<any> = ref({
   required: undefined,
 })
 
-const CheckboxProps: Ref<any> = ref({
-  'v-model': false,
+const CheckboxTest = ref({
+  boolean: false,
+  customValue: 'notChecked',
+  array: [],
 })
 </script>
 
 <template>
-  <section class="space-y-[24px]">
-    <div class="space-y-[8px]">
-      <h2 class="text-$primary">
-        # Form
-      </h2>
-    </div>
-    <div class="space-y-[8px]">
-      <h3 class="text-$primary">
-        # MaterialInput
-      </h3>
-
-      <p>Props:</p>
-      <table class="ml-[16px]">
-        <tr
-          v-for="(value, key) in materialInputProps"
-          :key="key"
-        >
-          <td>{{ key }}</td>
-          <td><span class="opacity-50">{{ `${value}` }}</span></td>
-        </tr>
-      </table>
-
-      <MaterialInput
-        :id="materialInputProps.id"
-        v-model="materialInputProps['v-model']"
-        :type="materialInputProps.type"
-        :placeholder="materialInputProps.placeholder"
-        :autocomplete="materialInputProps.autocomplete"
-        :step="materialInputProps.step"
-        :disabled="materialInputProps.disabled"
-        :required="materialInputProps.required"
-      />
-    </div>
-    <div class="space-y-[8px]">
-      <h3 class="text-$primary">
-        # MaterialTextarea
-      </h3>
-
-      <p>Props:</p>
-      <table class="ml-[16px]">
-        <tr
-          v-for="(value, key) in materialTextareaProps"
-          :key="key"
-        >
-          <td>{{ key }}</td>
-          <td><span class="opacity-50">{{ `${value}` }}</span></td>
-        </tr>
-      </table>
-
-      <MaterialTextarea
-        :id="materialTextareaProps.id"
-        v-model="materialTextareaProps['v-model']"
-        :placeholder="materialTextareaProps.placeholder"
-        :autocomplete="materialTextareaProps.autocomplete"
-        :disabled="materialTextareaProps.disabled"
-        :required="materialTextareaProps.required"
-      />
-    </div>
-
-    <div class="space-y-[8px]">
-      <h3 class="text-$primary">
-        # Checkbox {{ CheckboxProps['v-model'] }}
-      </h3>
-
-      <Checkbox
-        v-model="CheckboxProps['v-model']"
-      >
-        Test
-      </Checkbox>
-    </div>
-  </section>
+  <TestingWrapper>
+    <template #header>
+      Form
+    </template>
+    <template #default>
+      <!-- demo MaterialInput -->
+      <div>
+        <h2>MaterialInput</h2>
+        <TestingPropsTable :props="MaterialInputProps" />
+        <MaterialInput
+          :id="MaterialInputProps.id"
+          v-model="MaterialInputProps['v-model']"
+          :type="MaterialInputProps.type"
+          :placeholder="MaterialInputProps.placeholder"
+          :autocomplete="MaterialInputProps.autocomplete"
+          :step="MaterialInputProps.step"
+          :disabled="MaterialInputProps.disabled"
+          :required="MaterialInputProps.required"
+        />
+      </div>
+      <!-- /demo MaterialInput -->
+      <!-- demo MaterialTextarea -->
+      <div>
+        <h2>MaterialTextarea</h2>
+        <TestingPropsTable :props="MaterialTextarearops" />
+        <MaterialTextarea
+          :id="MaterialTextarearops.id"
+          v-model="MaterialTextarearops['v-model']"
+          :placeholder="MaterialTextarearops.placeholder"
+          :autocomplete="MaterialTextarearops.autocomplete"
+          :disabled="MaterialTextarearops.disabled"
+          :required="MaterialTextarearops.required"
+        />
+      </div>
+      <!-- /demo MaterialTextarea -->
+      <!-- demo Checkbox -->
+      <div>
+        <h2>Checkbox</h2>
+        <div>
+          <Checkbox v-model="CheckboxTest.boolean">
+            Boolean <span class="opacity-50 ml-[8px]">({{ CheckboxTest.boolean }})</span>
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox
+            v-model="CheckboxTest.customValue"
+            true-value="checked"
+            false-value="notChecked"
+          >
+            CustomValue <span class="opacity-50 ml-[8px]">({{ CheckboxTest.customValue }})</span>
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox
+            v-for="fruit in ['apple', 'strawberry', 'lemon', 'orange']"
+            v-model="CheckboxTest.array"
+            :value="fruit"
+            class="mr-[8px]"
+          >
+            {{ fruit }}
+          </Checkbox>
+          <span class="opacity-50">({{ CheckboxTest.array.join(', ') }})</span>
+        </div>
+      </div>
+      <!-- /demo Checkbox -->
+    </template>
+  </TestingWrapper>
 </template>

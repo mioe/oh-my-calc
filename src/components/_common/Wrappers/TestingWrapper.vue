@@ -20,7 +20,7 @@
 .testing-wrapper
   @for $i from 1 through 6
     h#{$i}::before
-      content: str-slice('######', 1, -7 + $i)
+      content: str-slice('######', 1, -7 + $i) + ' '
       @apply text-$primary
   & > div
     @apply space-y-[8px]
