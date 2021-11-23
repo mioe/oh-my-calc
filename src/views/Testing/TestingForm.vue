@@ -2,23 +2,45 @@
 import { ref } from 'vue'
 
 const MaterialInputProps = ref({
-  id: 'testInput',
-  'v-model': '',
-  type: 'text',
-  placeholder: 'MaterialInput',
-  autocomplete: 'off',
-  step: undefined,
-  disabled: false,
-  required: undefined,
+  id: 'string',
+  modelValue: 'string',
+  type: 'string of input types',
+  placeholder: 'string',
+  autocomplete: 'string',
+  step: 'number',
+  disabled: 'boolean',
+  required: 'boolean',
 })
 
-const MaterialTextarearops = ref({
-  id: 'testTextarea',
-  'v-model': '',
-  placeholder: 'MaterialTextarea',
-  autocomplete: 'off',
-  disabled: false,
-  required: undefined,
+const MaterialInputTest = ref({
+  modelValue: '',
+  placeholder: 'Hello World',
+})
+
+const MaterialTextareaProps = ref({
+  id: 'string',
+  modelValue: 'string',
+  placeholder: 'string',
+  autocomplete: 'string of autocomplete values',
+  disabled: 'boolean',
+  required: 'boolean',
+})
+
+const MaterialTextareaTest = ref({
+  modelValue: '',
+  placeholder: 'Hello World',
+})
+
+const CheckboxProps = ref({
+  modelValue: ['boolean', 'string', 'number', 'Array'],
+  value: ['string', 'number', 'Array'],
+  trueValue: ['boolean', 'string', 'number'],
+  falseValue: ['boolean', 'string', 'number'],
+  id: 'string',
+  checked: 'boolean',
+  name: 'string',
+  disabled: 'boolean',
+  indeterminate: 'boolean',
 })
 
 const CheckboxTest = ref({
@@ -39,34 +61,25 @@ const CheckboxTest = ref({
         <h2>MaterialInput</h2>
         <TestingPropsTable :props="MaterialInputProps" />
         <MaterialInput
-          :id="MaterialInputProps.id"
-          v-model="MaterialInputProps['v-model']"
-          :type="MaterialInputProps.type"
-          :placeholder="MaterialInputProps.placeholder"
-          :autocomplete="MaterialInputProps.autocomplete"
-          :step="MaterialInputProps.step"
-          :disabled="MaterialInputProps.disabled"
-          :required="MaterialInputProps.required"
+          v-model="MaterialInputTest.modelValue"
+          :placeholder="MaterialInputTest.placeholder"
         />
       </div>
       <!-- /demo MaterialInput -->
       <!-- demo MaterialTextarea -->
       <div>
         <h2>MaterialTextarea</h2>
-        <TestingPropsTable :props="MaterialTextarearops" />
+        <TestingPropsTable :props="MaterialTextareaProps" />
         <MaterialTextarea
-          :id="MaterialTextarearops.id"
-          v-model="MaterialTextarearops['v-model']"
-          :placeholder="MaterialTextarearops.placeholder"
-          :autocomplete="MaterialTextarearops.autocomplete"
-          :disabled="MaterialTextarearops.disabled"
-          :required="MaterialTextarearops.required"
+          v-model="MaterialTextareaTest.modelValue"
+          :placeholder="MaterialTextareaTest.placeholder"
         />
       </div>
       <!-- /demo MaterialTextarea -->
       <!-- demo Checkbox -->
       <div>
         <h2>Checkbox</h2>
+        <TestingPropsTable :props="CheckboxProps" />
         <div>
           <Checkbox v-model="CheckboxTest.boolean">
             Boolean <span class="opacity-50 ml-[8px]">({{ CheckboxTest.boolean }})</span>

@@ -73,7 +73,6 @@ const computedValue = computed({
       class="absolute -z-1 w-[1px] h-[1px] opacity-0"
     >
     <span class="mi-checkmark inline-block w-[18px] h-[18px] p-[1px] border-2 rounded-[4px] mr-[4px]" />
-
     <slot />
   </label>
 </template>

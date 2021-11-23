@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import { ref, Ref, watch } from 'vue'
 
-const MunchkinCalculatorPanelInputNumberProps: Ref<any> = ref({
-  'v-model': 0,
+const MunchkinCalculatorPanelInputNumberProps = ref({
+  modelValue: 'number',
+  placeholder: 'string',
+  min: 'number',
+  max: 'number',
+  step: 'number',
+  style: 'Object',
+})
+
+const MunchkinCalculatorPanelInputNumberTest = ref({
+  modelValue: 0,
   placeholder: 'Placeholder',
   min: 0,
   max: 10,
@@ -12,9 +21,16 @@ const MunchkinCalculatorPanelInputNumberProps: Ref<any> = ref({
   },
 })
 
-const MunchkinCalculatorPanelSelectProps: Ref<any> = ref({
-  'v-model': null,
-  placeholder: 'Placeholder',
+const MunchkinCalculatorPanelSelectProps = ref({
+  modelValue: 'string',
+  placeholder: 'string',
+  options: 'Array',
+  style: 'Object',
+})
+
+const MunchkinCalculatorPanelSelectText = ref({
+  modelValue: null,
+  placeholder: 'Hello World',
   options: [
     { value: '', text: 'Empty value' },
     { value: null, text: 'Null value' },
@@ -28,9 +44,18 @@ const MunchkinCalculatorPanelSelectProps: Ref<any> = ref({
   },
 })
 
-const MunchkinCalculatorPanelProps: Ref<any> = ref(null)
+
+const MunchkinCalculatorPanelProps = ref({
+  name: 'string',
+  currentSex: 'boolean',
+  level: 'number',
+  gear: 'number',
+  class: ['null', 'string'],
+  race: ['null', 'string'],
+})
+const MunchkinCalculatorPanelTest: Ref<any> = ref(null)
 const togglePanel = () => {
-  MunchkinCalculatorPanelProps.value = MunchkinCalculatorPanelProps.value === null
+  MunchkinCalculatorPanelTest.value = MunchkinCalculatorPanelTest.value === null
     ? {
       name: 'Wwwww',
       currentSex: true,
@@ -42,7 +67,7 @@ const togglePanel = () => {
     : null
 }
 
-watch(MunchkinCalculatorPanelProps,
+watch(MunchkinCalculatorPanelTest,
   (val: any) => { console.log('🦕 watch detected', val?.level )},
   { deep: true },
 )
@@ -59,12 +84,12 @@ watch(MunchkinCalculatorPanelProps,
         <h2>MunchkinCalculatorPanelInputNumber</h2>
         <TestingPropsTable :props="MunchkinCalculatorPanelInputNumberProps" />
         <MunchkinCalculatorPanelInputNumber
-          v-model="MunchkinCalculatorPanelInputNumberProps['v-model']"
-          :placeholder="MunchkinCalculatorPanelInputNumberProps.placeholder"
-          :min="MunchkinCalculatorPanelInputNumberProps.min"
-          :max="MunchkinCalculatorPanelInputNumberProps.max"
-          :step="MunchkinCalculatorPanelInputNumberProps.step"
-          :style="MunchkinCalculatorPanelInputNumberProps.style"
+          v-model="MunchkinCalculatorPanelInputNumberTest.modelValue"
+          :placeholder="MunchkinCalculatorPanelInputNumberTest.placeholder"
+          :min="MunchkinCalculatorPanelInputNumberTest.min"
+          :max="MunchkinCalculatorPanelInputNumberTest.max"
+          :step="MunchkinCalculatorPanelInputNumberTest.step"
+          :style="MunchkinCalculatorPanelInputNumberTest.style"
         />
       </div>
       <!-- /demo MunchkinCalculatorPanelInputNumber -->
@@ -73,15 +98,15 @@ watch(MunchkinCalculatorPanelProps,
         <h2>MunchkinCalculatorPanelSelect</h2>
         <TestingPropsTable :props="MunchkinCalculatorPanelSelectProps" />
         <MunchkinCalculatorPanelSelect
-          v-model="MunchkinCalculatorPanelSelectProps['v-model']"
-          :placeholder="MunchkinCalculatorPanelSelectProps.placeholder"
-          :options="MunchkinCalculatorPanelSelectProps.options"
+          v-model="MunchkinCalculatorPanelSelectText.modelValue"
+          :placeholder="MunchkinCalculatorPanelSelectText.placeholder"
+          :options="MunchkinCalculatorPanelSelectText.options"
         />
         <MunchkinCalculatorPanelSelect
-          v-model="MunchkinCalculatorPanelSelectProps['v-model']"
-          :placeholder="MunchkinCalculatorPanelSelectProps.placeholder"
-          :options="MunchkinCalculatorPanelSelectProps.options"
-          :style="MunchkinCalculatorPanelSelectProps.style"
+          v-model="MunchkinCalculatorPanelSelectText.modelValue"
+          :placeholder="MunchkinCalculatorPanelSelectText.placeholder"
+          :options="MunchkinCalculatorPanelSelectText.options"
+          :style="MunchkinCalculatorPanelSelectText.style"
         />
       </div>
       <!-- /demo MunchkinCalculatorPanelSelect -->
@@ -89,7 +114,6 @@ watch(MunchkinCalculatorPanelProps,
       <div>
         <h2>MunchkinCalculatorPanel</h2>
         <TestingPropsTable
-          v-if="MunchkinCalculatorPanelProps"
           :props="MunchkinCalculatorPanelProps"
         />
         <div>
@@ -110,7 +134,7 @@ watch(MunchkinCalculatorPanelProps,
           leave-to-class="transform opacity-0 scale-95"
         >
           <MunchkinCalculatorPanel
-            v-model="MunchkinCalculatorPanelProps"
+            v-model="MunchkinCalculatorPanelTest"
           />
         </transition>
       </div>

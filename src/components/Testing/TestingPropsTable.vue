@@ -1,10 +1,20 @@
 <script setup lang="ts">
-defineProps({
+import { computed } from 'vue'
+import { kebabize, sortObjectByKey } from '@/helpers'
+
+const p = defineProps({
   props: {
     type: Object,
     default: null
   },
 })
+
+const sortProps = computed(() => sortObjectByKey(p.props))
+
+const beautifyKey = (key: any) => {
+  if (key === 'modelValue') { return 'v-model' }
+  return kebabize(key)
+}
 </script>
 
 <template>
@@ -14,11 +24,17 @@ defineProps({
     </h3>
     <table class="ml-[16px]">
       <tr
-        v-for="(value, key) in props"
+        v-for="(value, key) in sortProps"
         :key="key"
       >
-        <td>{{ key }}</td>
-        <td><span class="opacity-50">{{ `${ Array.isArray(value) || typeof value === 'object' ? JSON.stringify(value) : value }` }}</span></td>
+        <td>
+          {{ beautifyKey(key) }}
+        </td>
+        <td class="pl-[4px]">
+          <span class="opacity-50">
+            {{ `${ Array.isArray(value) ? value.join(' | ') : value }` }}
+          </span>
+        </td>
       </tr>
     </table>
   </div>
