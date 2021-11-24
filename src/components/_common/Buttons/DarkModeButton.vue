@@ -7,7 +7,7 @@ import { isDark, toggleDark } from '@/plugins/dark-mode'
     class="button-default"
     @click="toggleDark()"
   >
-    <icon-carbon-moon v-if="isDark" />
-    <icon-carbon-sun v-else />
+    <icon-carbon:moon v-if="isDark" />
+    <icon-carbon:sun v-else />
   </button>
 </template>

@@ -39,7 +39,7 @@ export default defineConfig(({ command, mode }) => {
         resolvers: [
           // https://github.com/antfu/unplugin-icons
           IconsResolver({
-            componentPrefix: 'icon',
+            prefix: 'icon',
           }),
         ],
       }),
